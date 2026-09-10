@@ -1,47 +1,59 @@
 <html>
    <head>
       <title>Log In</title>
-      <h1 align=center>Log In</h1>
    </head>
    <body>
-      <table align="center" >
-         <!-- Username -->
-         <tr>
-            <td width="200">Username</td>
-            <td width="200"></td>
-            <td width="200"></td>
-         </tr>
-         <tr>
-            <td colspan="3">
-               <input type="text" name="username" size="90">
-            </td>
-         </tr>
+      <header>
+         <h1 align=center>Log In</h1>
+      </header>
 
-         <!-- Space -->
-         <tr><td colspan="3" height="50"></td></tr>
+      <form>
+         <table align="center" >
+            <!-- Table width, use colspan="3" -->
+            <tr><td width="200"></td><tr>
 
-         <!-- Password -->
-         <tr>
-            <td>Password</td>
-         </tr>
-         <tr>
-            <td colspan="3">
-               <input type="text" name="psw" size="90">
-            </td>
-         </tr>
+            <!-- Username -->
+            <tr>
+               <td colspan="3">Username</td>
+            </tr>
+            <tr>
+               <td colspan="3">
+                  <input type="text" name="username" size="90">
+               </td>
+            </tr>
 
-         <!-- Space -->
-         <tr><td colspan="3" height="25"></td></tr>
+            <!-- Space -->
+            <tr><td colspan="3" height="50"></td></tr>
 
-        <!-- Button  -->
-        <tr>
-           <!-- Sign Up Button  -->
-           <form action="SignUp.html">
-           <td align="right"><button type="SignUp">Sign Up</button></td>
-           </form>
-           <td align="center"><button type="Login">Login</button></td>
-           <td><button type="Reset">Reset</button></td>
-        </tr>
-      </table>
+            <!-- Password -->
+            <tr>
+               <td colspan="3">Password</td>
+            </tr>
+            <tr>
+               <td colspan="3">
+                  <input type="text" name="password" size="90">
+               </td>
+            </tr>
+
+            <!-- Space -->
+            <tr><td colspan="3" height="25"></td></tr>
+
+           <!-- Button  -->
+           <tr align="center">
+              <!-- Sign Up  -->
+              <td>
+                  <button type="submit" name="signup">Sign Up</button>
+              </td>
+
+              <!-- Login -->
+              <td>
+                  <button type="submit" name="login">Login</button>
+              </td>
+
+              <!-- Reset -->
+              <td><button type="reset">Reset</button></td>
+           </tr>
+         </table>
+      </form>
    </body>
 </html>
