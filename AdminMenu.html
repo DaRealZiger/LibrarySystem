@@ -17,6 +17,29 @@ Admin Menu is a site where:
          <h1 align="center">Admin Menu</h1>
       </header>
 
+      <!-- Command log -->
+      <!-- Should follow with scroll -->
+      <table align="center" border="1" width="100%">
+         <tr>
+            <form>
+               <td>Command Log
+                  <button type="button" name="clearCommandLog">Clear Command Log</button>
+               </td>
+            </form>
+         <tr>
+         <tr>
+            <td>
+               <!-- Command log goes here -->
+               <!-- SUCCESS, ERROR, WARNING should be Green, Red, Yellow. The <font> name is for CSS -->
+               <!-- Rows should be 4, column should be page width. Can implement in CSS using "overflow-y: scroll" -->
+
+               <font name="commandSuccess">[SUCCESS] Edited the user {user1} password from {abc} to {def}</font><br>
+               <font name="commandError">[ERROR] Unable to delete user {user2}</font><br>
+               <font name="commandWarning">[WARNING] sumn sumn</font><br>
+            </td>
+         <tr>
+      </table>
+
       <!-- Book Management -->
       <form>
         <h3 align="center">Book Management</h3>
