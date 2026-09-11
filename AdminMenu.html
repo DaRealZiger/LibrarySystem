@@ -1,0 +1,117 @@
+<!--
+Idea:
+Admin Menu is a site where:
+- Add & Delete Books
+  - Admins/Users can view books in ./Catalogue.html
+  - To edit, just delete and re-add the book (unless you know how to implement edit frontend feature)
+- View, Delete and Change user passwords
+-->
+
+
+<html>
+   <head>
+      <title>Admin Menu</title>
+   </head>
+   <body>
+      <header>
+         <h1 align="center">Admin Menu</h1>
+      </header>
+
+      <!-- Book Management -->
+      <form>
+        <h3 align="center">Book Management</h3>
+        <table align="center" border="1">
+           <tr>
+              <td align="center">Title</td>
+              <td align="center">Language</td>
+              <td align="center">Author</td>
+              <td align="center">Publisher</td>
+           </tr>
+           <tr>
+              <td><input type="text" size="90" name="Title"    ></td>
+              <td><input type="text" size="15" name="Language" ></td>
+              <td><input type="text" size="15" name="Author"   ></td>
+              <td><input type="text" size="15" name="Publisher"></td>
+           </tr>
+           <tr align="center">
+           <td colspan="4">
+              <button type="submit" name="addBook">Add Book</button>
+              <button type="submit" name="deleteBook">Delete Book</button>
+              <button type="submit" name="toggleBookBorrow">Toggle Book Borrow</button>
+              <button type="reset">Reset</button>
+           </td>
+           </tr>
+        </table>
+      </form>
+
+      <!-- User Edit Password  -->
+      <form>
+        <h3 align="center">User Edit Password</h3>
+        <table align="center" border="1">
+           <tr>
+              <td align="center">Username</td>
+              <td align="center">Password</td>
+           </tr>
+           <tr>
+              <td><input type="text" size="15" name="Username" ></td>
+              <td><input type="text" size="15" name="Password"></td>
+           </tr>
+           <tr align="center">
+           <td colspan="2">
+              <button type="submit" name="editUserPassword">Edit User Password</button>
+              <button type="reset">Reset</button>
+           </td>
+           </tr>
+        </table>
+      </form>
+
+      <!-- User Delete  -->
+      <form>
+        <h3 align="center">User Delete</h3>
+        <table align="center" border="1">
+           <tr>
+              <td align="center">Username</td>
+           </tr>
+           <tr>
+              <td><input type="text" size="15" name="Username" ></td>
+           </tr>
+           <tr align="center">
+           <td colspan="2">
+              <button type="submit" name="userDelete">User Delete</button>
+              <button type="reset">Reset</button>
+           </td>
+           </tr>
+        </table>
+      </form>
+
+      <!-- User List -->
+     <h3 align="center">User List</h3>
+     <table align="center" border="1">
+        <tr>
+           <td align="center" colspan="2">
+              <button type="button"name="Refresh User List">Refresh User List</button>
+           </td>
+        </tr>
+        <tr>
+           <td align="center">Username</td>
+           <td align="center">Password</td>
+        </tr>
+
+        <!-- User entries here -->
+        <tr>
+           <td>user1</td>
+           <td>1234</td>
+        </tr>
+        <tr>
+           <td>user2</td>
+           <td>1234</td>
+        </tr>
+        <tr>
+           <td>user3</td>
+           <td>1234</td>
+        </tr>
+     </table>
+
+      
+   </body>
+</html>
