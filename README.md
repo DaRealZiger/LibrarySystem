@@ -3,8 +3,8 @@ Files
 - Sign Up (Done)
 - CatalogueUser (Done)
 - CatalogueAdmin (Done)
-- AddBook
-- ViewBorrowed
+- AddBook (Done)
+- ViewBorrowed (Done)
 - UserList (Done)
 
 PBL code requirement/guideline:
