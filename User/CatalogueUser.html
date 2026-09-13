@@ -6,8 +6,10 @@
       <header>
          <h1 align="center">Catalogue</h1>
       </header>
+
       <form>
       <table align="center" border="1">
+          <!-- Table Header -->
          <tr>
             <td width="50">No.</td>
             <td width="200" align="center">Title</td>
@@ -16,6 +18,8 @@
             <td width="200" align="center">Publisher</td>
             <td width="150" align="center">Status</td>
          </tr>
+
+         <!-- First Book -->
          <tr>
              <td>1.</td>
              <td>&emsp;Patung Hina Hidup?</td>
@@ -25,6 +29,8 @@
              <td>&emsp;Available</td>
              <td><button type="submit">Borrow</button></td>
          </tr>
+
+         <!-- Second Book -->
          <tr>
              <td>2.</td>
              <td>&emsp;You've Reached Sam</td>
@@ -34,6 +40,8 @@
              <td>&emsp;Due:31/10/2026 </td>
              <td><button type="submit">Return</button></td>
          </tr>
+
+         <!-- Third Book -->
          <tr>
              <td>3.</td>
              <td>&emsp;White Tear</td>
@@ -45,11 +53,16 @@
          </tr>
       </table>
       </form>
+
+      <!-- Buttons -->
       <table align="center" >
           <tr>
+              <!-- View Borrowed Button -->
               <form action="./BorrowedBook.html">
                   <td width="950"><button type="submit">View Borrowed</button></td>
               </form>
+              
+              <!-- Log Out Button -->
               <form action="../LogIn.html">
                   <td align="right"><button type="submit">Log out</button></td>
               </form>
