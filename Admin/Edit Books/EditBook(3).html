@@ -7,114 +7,127 @@
             <h1 align=center>Edit Book</h1>
         </header>
 
-        <form>
-            <!-- <table border="1" align="center" > -->
-            <table align="center" >
-                <!-- Title -->
-                <tr>
-                    <td width="10"></td>
-                    <td>Title</td>
-                </tr>
-
-                <!-- Title form -->
-                <tr>
-                    <td></td>
-                    <td>
-                        <input type="text" name="title" value="White Tear" size="90">
-                    </td>
-                </tr>
-
-                <!-- Space -->
-                <tr><td height="50" colspan=5></td></tr>
-
-                <!-- Language -->
-                <tr>
-                    <td></td>
-                    <td>Language</td>
-                </tr>
-
-                <!-- Language Form -->
-                <tr>
-                    <td></td>
-                    <td>
+        <!-- <table align="center" border="3" style=border-color:red;> -->
+        <table align="center">
+            <tr>
+                <td colspan="2">
+                    <form>
+                        <!-- <table border="3" style="border-color:blue;"> -->
                         <table>
+                            <!-- Title -->
                             <tr>
-                                <td width="100">
-                                    <input type="radio" name="language" value="Malay">Malay
-                                </td>
-                                <td width="100">
-                                    <input type="radio" name="language" value="English">English
-                                </td>
-                                <td>
-                                    <input type="radio" name="language" value="Chinese">Chinese
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-
-                <!-- Space -->
-                <tr><td height="50" colspan=5></td></tr>
-
-                <!-- Author -->
-                <tr>
-                    <td width="10"></td>
-                    <td>Author</td>
-                </tr>
-
-                <!-- Author form -->
-                <tr>
-                    <td></td>
-                    <td>
-                        <input type="text" name="author" value="Wei Jun" size="90">
-                    </td>
-                </tr>
-
-                <!-- Space -->
-                <tr><td height="50" colspan=5></td></tr>
-
-                <!-- Publisher -->
-                <tr>
-                    <td width="10"></td>
-                    <td>Publisher</td>
-                </tr>
-
-                <!-- Publisher form -->
-                <tr>
-                    <td></td>
-                    <td>
-                        <input type="text" name="author" value="Kadokawa" size="90">
-                    </td>
-                </tr>
-
-                <!-- Space -->
-                <tr><td height="25" colspan=5></td></tr>
-
-                <!-- Buttons -->
-                <tr>
-                    <td colspan=2>
-                        <table>
-                            <tr>
-                                <!-- To push buttons to the right  -->
-                                <td align ="right" width="270"></td>
-
-                                <!-- Edit Book Button -->
-                                <td><button type="submit">Edit Book</button></td>
-
-                                <!-- Button seperator -->
                                 <td width="10"></td>
-
-                                <!-- Reset Button -->
-                                <td align="left" width="270"><button type="reset">Reset</button></td>
-        </form>
-                                <!-- Back Button -->
-                                <form action="../CatalogueAdmin.html">
-                                    <td><button type="submit">Back</button></td>
-                                </form>
+                                <td>Title</td>
                             </tr>
+
+                            <!-- Title form -->
+                            <tr>
+                                <td></td>
+                                <td>
+                                    <input  required type="text" name="title" value="White Tear" size="90">
+                                </td>
+                            </tr>
+
+                            <!-- Space -->
+                            <tr><td height="50" colspan=5></td></tr>
+
+                            <!-- Language -->
+                            <tr>
+                                <td></td>
+                                <td>Language</td>
+                            </tr>
+
+                            <!-- Language Choice -->
+                            <tr>
+                                <td></td>
+                                <td>
+                                    <table>
+                                        <tr>
+                                            <td width="100">
+                                                <input type="radio" name="language" value="Malay">Malay
+                                            </td>
+                                            <td width="100">
+                                                <input type="radio" name="language" value="English">English
+                                            </td>
+                                            <td>
+                                                <input type="radio" name="language" value="Chinese" checked>Chinese
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+
+                            <!-- Space -->
+                            <tr><td height="50" colspan=5></td></tr>
+
+                            <!-- Author -->
+                            <tr>
+                                <td width="10"></td>
+                                <td>Author</td>
+                            </tr>
+
+                            <!-- Author form -->
+                            <tr>
+                                <td></td>
+                                <td>
+                                    <input  required type="text" name="author" value="Wei Jun" size="90">
+                                </td>
+                            </tr>
+
+                            <!-- Space -->
+                            <tr><td height="50" colspan=5></td></tr>
+
+                            <!-- Publisher -->
+                            <tr>
+                                <td width="10"></td>
+                                <td>Publisher</td>
+                            </tr>
+
+                            <!-- Publisher form -->
+                            <tr>
+                                <td></td>
+                                <td>
+                                    <input type="text" name="author" value="Gempak Starz" size="90">
+                                </td>
+                            </tr>
+                            <!-- Space -->
+                            <tr><td height="25" colspan=5></td></tr>
+
+                            <!-- Buttons -->
+                            <tr>
+                                <td colspan=2>
+                                    <!-- <table border="3" style="border-color:green;"> -->
+                                    <table>
+                                        <tr>
+                                            <!-- To push buttons to the right  -->
+                                            <td align ="right" width="270"></td>
+
+                                            <!-- Edit Book Button -->
+                                            <td><button type="submit">Edit Book</button></td>
+
+                                            <!-- Button seperator  -->
+                                            <td width="10"></td>
+
+                                            <!-- Reset Button -->
+                                            <td align="left" width="270"><button type="reset">Reset</button></td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                                    </table>
+                    </form>
+                </td>
+            </tr>
+            <tr>
+                <td width="605">
+                </td>
+                <td>
+                    <!-- Back Button -->
+                    <form action=../CatalogueAdmin.html>
+                        <button type="submit">Back</button>
+                    </form>
+                </td>
+            </tr>
                         </table>
-                    </td>
-                </tr>
-            </table>
     </body>
 </html>
