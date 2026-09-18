@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>Catalogue</title>
+        <title>Borrowed Books</title>
     </head>
     <body bgcolor="#ECD8C6">
         <header>
@@ -8,20 +8,18 @@
                 <tr><td bgcolor="#603E20"><img src="../src/Banner.jpg" alt="Banner"  width="1290" height="100"></td></tr>
                 <tr>
                     <td bgcolor="#603E20">
-                        <marquee scrollamount="20"><h1><font color="white">Catalogue</font></h1></marquee>
+                        <marquee scrollamount="20"><h1><font color="white">Borrowed Books</font></h1></marquee>
                     </td>
                 </tr>
             </table>
         </header>
 
         <form>
-            <table align="center">
-
+            <table>
                 <!-- Space -->
                 <tr><td height="50" colspan=5></td></tr>
                 <tr><td>
                         <table align="center" border="1">
-
                             <!-- Table Header -->
                             <tr height="40">
                                 <td width="50" align="center"><b>No.</b></td>
@@ -35,17 +33,6 @@
                             <!-- First Book -->
                             <tr height="58">
                                 <td>&emsp;1.</td>
-                                <td>&emsp;Patung Hina Hidup?</td>
-                                <td>&emsp;Malay</td>
-                                <td>&emsp;Honobu Yonezawa</td>
-                                <td>&emsp;Kadokawa</td>
-                                <td>&emsp;Available</td>
-                                <td><button type="submit">Borrow</button></td>
-                            </tr>
-
-                            <!-- Second Book -->
-                            <tr height="58">
-                                <td>&emsp;2.</td>
                                 <td>&emsp;You've Reached Sam</td>
                                 <td>&emsp;English</td>
                                 <td>&emsp;Dustin Thao</td>
@@ -53,37 +40,21 @@
                                 <td>&emsp;Due:31/10/2026 </td>
                                 <td><button type="submit">Return</button></td>
                             </tr>
-
-                            <!-- Third Book -->
-                            <tr height="58">
-                                <td>&emsp;3.</td>
-                                <td>&emsp;White Tear</td>
-                                <td>&emsp;Chinese</td>
-                                <td>&emsp;Wei Jun</td>
-                                <td>&emsp;Gempak Starz</td>
-                                <td>&emsp;Available</td>
-                                <td><button type="submit">Borrow</button></td>
-                            </tr>
                         </table>
                     </td></tr>
             </table>
         </form>
 
-        <!-- Buttons -->
-        <table align="center">
-            <tr>
-                <!-- View Borrowed Button -->
-                <td width="950">
-                    <form action="./BorrowedBook.html">
-                        <button type="submit">View Borrowed</button>
-                    </form></td>
+        <form action="./CatalogueUser.html">
+            <table align="center" >
+                <tr>
+                    <!-- Formatter -->
+                <td width="950"></td>
 
-                    <!-- Log Out Button -->
-                    <td align="right">
-                        <form action="../LogIn.html">
-                            <button type="submit">Log out</button>
-                        </form></td>
-            </tr>
-        </table>
+                <!-- Back Button  -->
+                <td align="right"><button type="submit">Back</button></td>
+                </tr>
+            </table>
+        </form>
     </body>
 </html>
