@@ -5,7 +5,7 @@
     <body bgcolor="#ECD8C6">
         <header>
             <table>
-                <tr><td bgcolor="#603E20"><img src="src/Banner.jpg" alt="Banner"  width="1290" height="100"></td></tr>
+                <tr><td bgcolor="#603E20"><img src="../src/Banner.jpg" alt="Banner"  width="1290" height="100"></td></tr>
                 <tr>
                     <td bgcolor="#603E20">
                         <marquee scrollamount="20"><h1><font color="white">Sign Up</font></h1></marquee>
@@ -14,13 +14,13 @@
             </table>
         </header>
 
+        <form>
         <table align="center">
             <!-- Space -->
             <tr><td height="50" colspan=5></td></tr>
 
             <tr>
                 <td colspan="2">
-                    <form>
                         <table>
                             <!-- Username -->
                             <tr>
@@ -93,7 +93,6 @@
                                 </td>
                             </tr>
                         </table>
-                    </form>
                 </td>
             </tr>
             <tr>
@@ -101,11 +100,10 @@
                 </td>
                 <td>
                     <!-- Back Button -->
-                    <form action="LogIn.html">
-                        <button type="submit">Back</button>
-                    </form>
+                        <button type="submit" formaction="LogIn.html" formnovalidate>Back</button>
                 </td>
             </tr>
         </table>
+        </form>
     </body>
 </html>
