@@ -31,39 +31,13 @@
                                 <td width="200" align="center"><b>Publisher</b></td>
                                 <td width="150" align="center"><b>Status</b></td>
                             </tr>
+                            <?php
+                            require_once "../Includes/function.inc.php";
+                            $conn = dbconn();
+                            userBookTable($conn);
+                            ?>
 
-                            <!-- First Book -->
-                            <tr height="58">
-                                <td>&emsp;1.</td>
-                                <td>&emsp;Patung Hina Hidup?</td>
-                                <td>&emsp;Malay</td>
-                                <td>&emsp;Honobu Yonezawa</td>
-                                <td>&emsp;Kadokawa</td>
-                                <td>&emsp;Available</td>
-                                <td><button type="submit">Borrow</button></td>
-                            </tr>
 
-                            <!-- Second Book -->
-                            <tr height="58">
-                                <td>&emsp;2.</td>
-                                <td>&emsp;You've Reached Sam</td>
-                                <td>&emsp;English</td>
-                                <td>&emsp;Dustin Thao</td>
-                                <td>&emsp;Wednesday Books</td>
-                                <td>&emsp;<font color="Red">Due:31/10/2026</font></td>
-                                <td><button type="submit">Return</button></td>
-                            </tr>
-
-                            <!-- Third Book -->
-                            <tr height="58">
-                                <td>&emsp;3.</td>
-                                <td>&emsp;White Tear</td>
-                                <td>&emsp;Chinese</td>
-                                <td>&emsp;Wei Jun</td>
-                                <td>&emsp;Gempak Starz</td>
-                                <td>&emsp;Available</td>
-                                <td><button type="submit">Borrow</button></td>
-                            </tr>
                         </table>
                     </td></tr>
             </table>

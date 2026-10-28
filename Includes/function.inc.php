@@ -1,6 +1,6 @@
 <?php 
-$BOOKTABLE = 'Books';
-$USERTABLE = 'Users';
+const BOOKTABLE = 'Books';
+const USERTABLE = 'Users';
 
 function dbconn(){
     $serverName = 'localhost';
@@ -19,4 +19,31 @@ function dbconn(){
     }
 
     return $conn;
+}
+
+function userBookTable($conn){
+    $no = 1;
+    $sql = "SELECT BookName, Language, Author, Publisher, Status FROM " . BOOKTABLE;
+    $result = $conn ->query($sql);
+    if ($result -> num_rows > 0) {
+        while ($row = $result -> fetch_assoc()){
+            echo "<tr height = '58'>";
+            echo "<td>&emsp;".$no++."</td>";
+            echo "<td>&emsp;".$row["BookName"]."</td>";
+            echo "<td>&emsp;".$row["Language"]."</td>";
+            echo "<td>&emsp;".$row["Author"]."</td>";
+            echo "<td>&emsp;".$row["Publisher"]."</td>";
+            echo "<td>&emsp;".$row["Status"]."</td>";
+            echo "</tr>";
+        } 
+    }else {
+            echo "<tr height = '58'>";
+            echo "<td align='center'>-</td>";
+            echo "<td align='center'>-</td>";
+            echo "<td align='center'>-</td>";
+            echo "<td align='center'>-</td>";
+            echo "<td align='center'>-</td>";
+            echo "<td align='center'>-</td>";
+            echo "</tr>";
+    }
 }

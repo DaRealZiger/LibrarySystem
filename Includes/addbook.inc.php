@@ -6,7 +6,7 @@ $language= $_POST["language"];
 $author = $_POST["author"];
 $publisher= $_POST["publisher"];
 
-$sql = "INSERT INTO $BOOKTABLE  (BookName, Language, Author, Publisher, Status)
+$sql = "INSERT INTO ".BOOKTABLE." (BookName, Language, Author, Publisher, Status)
 VALUES ('$title', '$language', '$author', '$publisher', 'Available')";
 
 if ($conn -> query($sql) === TRUE){
