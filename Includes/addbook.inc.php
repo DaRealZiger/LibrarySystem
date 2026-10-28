@@ -7,12 +7,17 @@ $author = $_POST["author"];
 $publisher= $_POST["publisher"];
 
 $sql = "INSERT INTO ".BOOKTABLE." (BookName, Language, Author, Publisher, Status)
-VALUES ('$title', '$language', '$author', '$publisher', 'Available')";
+VALUES (?, ?, ?, ?, 'Available')";
+$stmt = mysqli_stmt_init($conn);
 
-if ($conn -> query($sql) === TRUE){
+if (mysqli_stmt_prepare($stmt, $sql)) {
+    mysqli_stmt_bind_param($stmt, "ssss", $title, $language, $author, $publisher);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
     header("Location:../Admin/CatalogueAdmin.html");
     exit();
 } else {
-    echo "Error " . $sql . "<br>" . $conn -> error;
+    $error = mysqli_stmt_error($stmt);
+    echo $error;
 }
 ?>
