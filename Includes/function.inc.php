@@ -1,6 +1,7 @@
 <?php 
 const BOOKTABLE = 'Books';
 const USERTABLE = 'Users';
+const BASEURL = 'http://localhost:8080/Library%20System';
 
 function dbconn(){
     $serverName = 'localhost';
@@ -45,5 +46,21 @@ function userBookTable($conn){
             echo "<td align='center'>-</td>";
             echo "<td align='center'>-</td>";
             echo "</tr>";
+    }
+}
+
+function isLoggedIn(): bool {
+    return isset($_SESSION['username'])
+        && $_SESSION['username'] !== '';
+}
+
+function isAdmin(): bool {
+    return isLoggedIn() && $_SESSION['role'] === 'admin';
+}
+
+function checkPassword($psw, $confPsw){
+    if ($psw != $confPsw) {
+        header("location:".BASEURL."/Registration/Signup.php?error=PswDontMatch");
+        exit();
     }
 }
