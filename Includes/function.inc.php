@@ -60,7 +60,8 @@ function isAdmin(): bool {
 
 function checkPassword($psw, $confPsw){
     if ($psw != $confPsw) {
-        header("location:".BASEURL."/Registration/Signup.php?error=PswDontMatch");
+        header("location:".BASEURL."/Registration/Signup.html?error=PswDontMatch");
         exit();
     }
 }
+
