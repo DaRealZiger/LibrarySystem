@@ -60,7 +60,7 @@ function isAdmin(): bool {
 
 function checkPassword($psw, $confPsw) {
     if (strcmp($psw, $confPsw) !== 0) {
-        header("location:".BASEURL."/Registration/Signup.html?error=PswDontMatch");
+        header("location:".BASEURL."/Registration/SignUp.php?error=PswDontMatch");
         exit();
     }
 }
@@ -71,7 +71,7 @@ function usrExists($conn, $username) {
 
     $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt, $sql)) {
-        header("location:".BASEURL."/Registration/Signup.html?error=stmtFailed");
+        header("location:".BASEURL."/Registration/SignUp.php?error=stmtFailed");
         exit();
     }
 
@@ -82,7 +82,7 @@ function usrExists($conn, $username) {
 
     if (mysqli_fetch_assoc($resultData) !== null) {
         mysqli_stmt_close($stmt);
-        header("location:".BASEURL."/Registration/Signup.html?error=UserExists");
+        header("location:".BASEURL."/Registration/SignUp.php?error=UserExists");
         exit();
     }
 }

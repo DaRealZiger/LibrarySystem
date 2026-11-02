@@ -5,8 +5,8 @@ $username= $_POST["username"];
 $psw= $_POST["psw"];
 $confirmPsw = $_POST["confirmPsw"];
 
-checkPassword($psw, $confirmPsw);
 usrExists($conn, $username);
+checkPassword($psw, $confirmPsw);
 
 $sql = "INSERT INTO ".USERTABLE." (Username, Password, Role)
 VALUES (?, ?, 'user')";

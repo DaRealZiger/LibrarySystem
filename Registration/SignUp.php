@@ -49,7 +49,7 @@
                             <tr>
                                 <td></td>
                                 <td>
-                                    <input required type="text" name="psw" placeholder="Insert Password" size="90">
+                                    <input required type="password" name="psw" placeholder="Insert Password" size="90">
                                 </td>
                             </tr>
 
@@ -66,7 +66,7 @@
                             <tr>
                                 <td></td>
                                 <td>
-                                    <input required type="text" name="confirmPsw" placeholder="Confirm Password" size="90">
+                                    <input required type="password" name="confirmPsw" placeholder="Confirm Password" size="90">
                                 </td>
                             </tr>
                             <!-- Space -->
@@ -103,6 +103,25 @@
                         <button type="submit" formaction="LogIn.html" formnovalidate>Back</button>
                     </td>
                 </tr>
+
+            <?php
+                if (isset($_GET["error"])){
+                    echo "
+                        <script>
+                            alert('Signup Failed!');
+                        </script>
+                        ";
+                    if($_GET["error"] == "stmtFailed") {
+                        echo '<p>Something went wrong try again!</p>';
+                    } 
+                    else if($_GET["error"] == "UserExists") {
+                        echo '<p>Your username is taken</p>';
+                    }
+                    else if($_GET['error'] == 'PswDontMatch') {
+                        echo '<p>Password and Confirmation password don\'t match</p>';
+                    }
+                }
+            ?>
             </table>
         </form>
     </body>
