@@ -65,7 +65,7 @@ function checkPassword($psw, $confPsw) {
     }
 }
 
-function usrExists($conn, $username): bool {
+function usrExists($conn, $username) {
     $sql = "SELECT * FROM ".USERTABLE.
         " WHERE Username = ?";
 
@@ -76,11 +76,17 @@ function usrExists($conn, $username): bool {
 
         $resultData = mysqli_stmt_get_result($stmt);
 
-        $result = mysqli_fetch_assoc($resultData) !== null;
+        if ($row= mysqli_fetch_assoc($resultData)) {
+            mysqli_stmt_close($stmt);
+            return $row;
+        }else {
+            mysqli_stmt_close($stmt);
+            $result = false;
+            return $result;
+        }
         
-        return $result;
-
     }else {
+        mysqli_stmt_close($stmt);
         stmtFailed();
     }
 }

@@ -5,7 +5,7 @@ $username= $_POST["username"];
 $psw= $_POST["psw"];
 $confirmPsw = $_POST["confirmPsw"];
 
-if (usrExists($conn, $username)) {
+if (usrExists($conn, $username) !== false) {
     header("location:".BASEURL."/Registration/SignUp.php?error=UserExists");
     exit();
 }
