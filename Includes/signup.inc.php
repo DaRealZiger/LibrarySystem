@@ -5,7 +5,10 @@ $username= $_POST["username"];
 $psw= $_POST["psw"];
 $confirmPsw = $_POST["confirmPsw"];
 
-usrExists($conn, $username);
+if (usrExists($conn, $username)) {
+    header("location:".BASEURL."/Registration/SignUp.php?error=UserExists");
+    exit();
+}
 checkPassword($psw, $confirmPsw);
 
 $sql = "INSERT INTO ".USERTABLE." (Username, Password, Role)

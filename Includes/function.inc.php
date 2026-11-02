@@ -65,24 +65,32 @@ function checkPassword($psw, $confPsw) {
     }
 }
 
-function usrExists($conn, $username) {
-    $sql = "SELECT Username FROM ".USERTABLE.
+function usrExists($conn, $username): bool {
+    $sql = "SELECT * FROM ".USERTABLE.
         " WHERE Username = ?";
 
     $stmt = mysqli_stmt_init($conn);
-    if (!mysqli_stmt_prepare($stmt, $sql)) {
-        header("location:".BASEURL."/Registration/SignUp.php?error=stmtFailed");
-        exit();
+    if (mysqli_stmt_prepare($stmt, $sql)) {
+        mysqli_stmt_bind_param($stmt, 's', $username);
+        mysqli_stmt_execute($stmt);
+
+        $resultData = mysqli_stmt_get_result($stmt);
+
+        $result = mysqli_fetch_assoc($resultData) !== null;
+        
+        return $result;
+
+    }else {
+        stmtFailed();
     }
+}
 
-    mysqli_stmt_bind_param($stmt, 's', $username);
-    mysqli_stmt_execute($stmt);
-
-    $resultData = mysqli_stmt_get_result($stmt);
-
-    if (mysqli_fetch_assoc($resultData) !== null) {
-        mysqli_stmt_close($stmt);
-        header("location:".BASEURL."/Registration/SignUp.php?error=UserExists");
-        exit();
-    }
+function stmtFailed() {
+    $previousPage = $_SERVER['HTTP_REFERER'] ?? BASEURL . "/Registration/Signup.html";
+    
+    $urlPart = explode('?', $previousPage);
+    $baseURL = $urlPart[0];
+    
+    header("Location: " . $baseURL . "?error=stmtFailed");
+    exit();
 }

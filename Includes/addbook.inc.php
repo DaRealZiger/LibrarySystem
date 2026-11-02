@@ -17,7 +17,6 @@ if (mysqli_stmt_prepare($stmt, $sql)) {
     header("location:".BASEURL."/Admin/CatalogueAdmin.html");
     exit();
 } else {
-    $error = mysqli_stmt_error($stmt);
-    echo $error;
+    stmtFailed();
 }
 ?>
