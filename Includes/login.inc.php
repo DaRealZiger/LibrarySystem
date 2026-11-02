@@ -23,7 +23,7 @@ if ($psw !== $storedPassword) {
     $_SESSION['Role'] = $uidExists['Role'];
     
     if (isAdmin()) {
-        header("location:".BASEURL."/Admin/CatalogueAdmin.php");
+        header("location:".BASEURL."/Admin/CatalogueAdmin.html");
         exit();
     }else {
         header("location:".BASEURL."/User/CatalogueUser.php");
