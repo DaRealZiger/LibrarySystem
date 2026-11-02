@@ -106,11 +106,6 @@
 
             <?php
                 if (isset($_GET["error"])){
-                    echo "
-                        <script>
-                            alert('Signup Failed!');
-                        </script>
-                        ";
                     if($_GET["error"] == "stmtFailed") {
                         echo '<p>Something went wrong try again!</p>';
                     } 

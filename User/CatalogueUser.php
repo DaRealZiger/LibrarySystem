@@ -41,23 +41,21 @@
                         </table>
                     </td></tr>
             </table>
-        </form>
 
         <!-- Buttons -->
         <table align="center">
             <tr>
                 <!-- View Borrowed Button -->
                 <td width="950">
-                    <form action="BorrowedBooks.html">
-                        <button type="submit">View Borrowed</button>
-                    </form></td>
+                    <button type="submit">View Borrowed</button>
+                </td>
 
                     <!-- Log Out Button -->
                     <td align="right">
-                        <form action="../Registration/LogIn.html">
-                            <button type="submit">Log out</button>
-                        </form></td>
+                        <button type="submit" formaction="../Includes/logout.inc.php">Log out</button>
+                    </td>
             </tr>
         </table>
+        </form>
     </body>
 </html>

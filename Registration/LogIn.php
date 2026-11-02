@@ -14,7 +14,7 @@
             </table>
         </header>
 
-        <form>
+        <form action="../Includes/login.inc.php" method="POST">
             <table align="center">
                 <!-- Space -->
                 <tr><td height="50" colspan=5></td></tr>
@@ -49,7 +49,7 @@
                             <tr>
                                 <td></td>
                                 <td>
-                                    <input required type="text" name="pwd" placeholder="Insert Password" size="90">
+                                    <input required type="text" name="psw" placeholder="Insert Password" size="90">
                                 </td>
                             </tr>
 
@@ -87,6 +87,16 @@
                         <button type="submit" formaction="SignUp.php" formnovalidate>SignUp</button>
                     </td>
                 </tr>
+            <?php
+                if (isset($_GET["error"])){
+                    if($_GET["error"] == "WrongUsername") {
+                        echo '<p>Incorrect Username</p>';
+                    } 
+                    else if($_GET["error"] == "WrongPassword") {
+                        echo '<p>Incorrect Password</p>';
+                    }
+                }
+            ?>
             </table>
         </form>
     </body>

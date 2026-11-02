@@ -50,12 +50,12 @@ function userBookTable($conn){
 }
 
 function isLoggedIn(): bool {
-    return isset($_SESSION['username'])
-        && $_SESSION['username'] !== '';
+    return isset($_SESSION['Username'])
+        && $_SESSION['Username'] !== '';
 }
 
 function isAdmin(): bool {
-    return isLoggedIn() && $_SESSION['role'] === 'admin';
+    return isLoggedIn() && $_SESSION['Role'] === 'admin';
 }
 
 function checkPassword($psw, $confPsw) {
