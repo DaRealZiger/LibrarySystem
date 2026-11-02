@@ -58,10 +58,31 @@ function isAdmin(): bool {
     return isLoggedIn() && $_SESSION['role'] === 'admin';
 }
 
-function checkPassword($psw, $confPsw){
-    if ($psw != $confPsw) {
+function checkPassword($psw, $confPsw) {
+    if (strcmp($psw, $confPsw) !== 0) {
         header("location:".BASEURL."/Registration/Signup.html?error=PswDontMatch");
         exit();
     }
 }
 
+function usrExists($conn, $username) {
+    $sql = "SELECT Username FROM ".USERTABLE.
+        " WHERE Username = ?";
+
+    $stmt = mysqli_stmt_init($conn);
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        header("location:".BASEURL."/Registration/Signup.html?error=stmtFailed");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt, 's', $username);
+    mysqli_stmt_execute($stmt);
+
+    $resultData = mysqli_stmt_get_result($stmt);
+
+    if (mysqli_fetch_assoc($resultData) !== null) {
+        mysqli_stmt_close($stmt);
+        header("location:".BASEURL."/Registration/Signup.html?error=UserExists");
+        exit();
+    }
+}
