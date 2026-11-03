@@ -1,3 +1,14 @@
+<?php
+require_once "../Includes/function.inc.php";
+session_start();
+if (!isLoggedIn()) {
+    header("location:".BASEURL."/Registration/LogIn.php");
+    exit();
+} elseif (!isAdmin()) {
+    header("location:".BASEURL."/User/CatalogueUser.php");
+    exit();
+}
+?>
 <html>
     <head>
         <title>Add Book</title>

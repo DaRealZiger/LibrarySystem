@@ -1,8 +1,14 @@
 <?php
+require_once "../Includes/function.inc.php";
 session_start();
-echo $_SESSION["Username"];
-echo "&nbsp";
-echo $_SESSION["Role"];
+if (!isLoggedIn()) {
+    header("location:".BASEURL."/Registration/LogIn.php");
+    exit();
+} elseif (!isAdmin()) {
+    header("location:".BASEURL."/User/CatalogueUser.php");
+    exit();
+}
+?>
 ?>
 <html>
     <head>
@@ -56,12 +62,12 @@ echo $_SESSION["Role"];
                 <tr>
                     <!-- View Users Button -->
                     <td width="100">
-                        <button type="submit" formaction="UserList.html">View Users</button>
+                        <button type="submit" formaction="UserList.php">View Users</button>
                     </td>
 
                     <!-- Add Book Button -->
                     <td width="900">
-                        <button type="submit" formaction="AddBook.html">Add Book</button>
+                        <button type="submit" formaction="AddBook.php">Add Book</button>
                     </td>
 
                     <!-- Log Out Button -->
