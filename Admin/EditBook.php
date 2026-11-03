@@ -5,9 +5,6 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST") {
     exit();
 }
 session_start();
-echo $_SESSION["Username"];
-echo "&nbsp";
-echo $_SESSION["Role"];
 $bookID = $_POST["BookID"];
 $conn = dbconn();
 
@@ -137,7 +134,7 @@ $row = $result ->fetch_assoc();
                                             <td width="10"></td>
 
                                             <!-- Delete Book Button -->
-                                            <td><button type="submit">Delete Book</button></td>
+                                            <td><button type="submit" formaction="../Includes/delete.inc.php">Delete Book</button></td>
 
                                             <!-- Button seperator  -->
                                             <td width="10"></td>
