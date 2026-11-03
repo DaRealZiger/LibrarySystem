@@ -1,3 +1,14 @@
+<?php
+require_once "../Includes/function.inc.php";
+session_start();
+if (!isLoggedIn()) {
+    header("location:".BASEURL."/Registration/LogIn.php");
+    exit();
+} elseif (!isAdmin()) {
+    header("location:".BASEURL."/User/CatalogueUser.php");
+    exit();
+}
+?>
 <html>
     <head>
         <title>User List</title>
@@ -26,32 +37,18 @@
                             <td align="center" width="150"><b>Due Date</b></td>
                         </tr>
 
-                        <!-- First User -->
-                        <tr height="58">
-                            <td>&emsp;Sasha</td>
-                            <td>&emsp;You've Reached sam</td>
-                            <td>&emsp;<font color="Red">31/10/2026</font></td>
-                        </tr>
+                            <?php
+                            require_once "../Includes/function.inc.php";
+                            $conn = dbconn();
+                            userTable($conn);
+                            ?>
 
-                        <!-- Second User -->
-                        <tr height="58">
-                            <td>&emsp;Ryan</td>
-                            <td align="center">-</td>
-                            <td align="center">-</td>
-                        </tr>
-
-                        <!-- Third User -->
-                        <tr height="58">
-                            <td>&emsp;Alice</td>
-                            <td align="center">-</td>
-                            <td align="center">-</td>
-                        </tr>
                     </table>
                 </td></tr>
         </table>
 
         <!-- Back Button -->
-        <form action="CatalogueAdmin.html">
+        <form action="CatalogueAdmin.php">
             <table align="right">
                 <tr><td width="400"><br><button type="submit">Back</button></td></tr>
             </table>

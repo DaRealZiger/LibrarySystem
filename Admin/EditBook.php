@@ -1,6 +1,20 @@
+<?php
+require_once "../Includes/function.inc.php";
+if ($_SERVER["REQUEST_METHOD"] !== "POST") {
+    header("location:".BASEURL."/Admin/CatalogueAdmin.php");
+    exit();
+}
+session_start();
+$bookID = $_POST["BookID"];
+$conn = dbconn();
+
+$sql = "SELECT BookID, BookName, Language, Author, Publisher FROM ".BOOKTABLE." WHERE BookID =".$bookID.";";
+$result = $conn -> query($sql);
+$row = $result ->fetch_assoc();
+?>
 <html>
     <head>
-        <title>Add Book</title>
+        <title>Edit Book</title>
     </head>
     <body bgcolor="#ECD8C6">
         <header>
@@ -8,13 +22,14 @@
                 <tr><td bgcolor="#603E20"><img src="../src/Banner.jpg" alt="Banner"  width="1290" height="100"></td></tr>
                 <tr>
                     <td bgcolor="#603E20">
-                        <marquee scrollamount="20"><h1><font color="white">Add Book</font></h1></marquee>
+                        <marquee scrollamount="20"><h1><font color="white">Edit Book</font></h1></marquee>
                     </td>
                 </tr>
             </table>
         </header>
 
-        <form>
+        <form method="POST">
+        <input type="hidden" name="BookID" value="<?=htmlspecialchars($row['BookID'])?>">
             <table align="center">
                 <!-- Space -->
                 <tr><td height="50" colspan=5></td></tr>
@@ -32,7 +47,7 @@
                             <tr>
                                 <td></td>
                                 <td>
-                                    <input  required type="text" name="title" placeholder="Insert Title" size="90">
+                                <input  required type="text" name="title" value="<?=htmlspecialchars($row['BookName'])?>" size="90">
                                 </td>
                             </tr>
 
@@ -52,13 +67,16 @@
                                     <table>
                                         <tr>
                                             <td width="100">
-                                                <input type="radio" name="language" value="Malay">Malay
+                                                <input type="radio" name="language" value="Malay"
+                                                 <?= $row["Language"] === "Malay" ? "checked" : ""?>>Malay
                                             </td>
-                                            <td>
-                                                <input type="radio" name="language" value="English">English
+                                            <td width="100">
+                                                <input type="radio" name="language" value="English"
+                                                 <?= $row["Language"] === "English" ? "checked" : ""?>>English
                                             </td>
-                                            <td>
-                                                <input type="radio" name="language" value="Chinese">Chinese
+                                            <td width="100">
+                                                <input type="radio" name="language" value="Chinese"
+                                                 <?= $row["Language"] === "Chinese" ? "checked" : ""?>>Chinese
                                             </td>
                                         </tr>
                                     </table>
@@ -78,7 +96,7 @@
                             <tr>
                                 <td></td>
                                 <td>
-                                    <input  required type="text" name="author" placeholder="Insert Author" size="90">
+                                    <input  required type="text" name="author" value="<?=htmlspecialchars($row['Author'])?>" size="90">
                                 </td>
                             </tr>
 
@@ -95,7 +113,7 @@
                             <tr>
                                 <td></td>
                                 <td>
-                                    <input type="text" name="publisher" placeholder="Insert Publisher" size="90">
+                                    <input type="text" name="publisher" value="<?=htmlspecialchars($row['Publisher'])?>" size="90">
                                 </td>
                             </tr>
                             <!-- Space -->
@@ -107,10 +125,16 @@
                                     <table>
                                         <tr>
                                             <!-- To push buttons to the right  -->
-                                            <td align ="right" width="270"></td>
+                                            <td align ="right" width="200"></td>
 
-                                            <!-- Add Book Button -->
-                                            <td><button type="submit">Add Book</button></td>
+                                            <!-- Edit Book Button -->
+                                            <td><button type="submit" formaction="../Includes/editbook.inc.php">Edit Book</button></td>
+
+                                            <!-- Button seperator  -->
+                                            <td width="10"></td>
+
+                                            <!-- Delete Book Button -->
+                                            <td><button type="submit" formaction="../Includes/delete.inc.php">Delete Book</button></td>
 
                                             <!-- Button seperator  -->
                                             <td width="10"></td>
@@ -129,7 +153,7 @@
                     </td>
                     <td>
                         <!-- Back Button -->
-                        <button type="submit" formaction="CatalogueAdmin.html" formnovalidate>Back</button>
+                        <button formaction="CatalogueAdmin.php">Back</button>
                     </td>
                 </tr>
             </table>

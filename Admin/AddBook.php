@@ -1,20 +1,31 @@
+<?php
+require_once "../Includes/function.inc.php";
+session_start();
+if (!isLoggedIn()) {
+    header("location:".BASEURL."/Registration/LogIn.php");
+    exit();
+} elseif (!isAdmin()) {
+    header("location:".BASEURL."/User/CatalogueUser.php");
+    exit();
+}
+?>
 <html>
     <head>
-        <title>Edit Book</title>
+        <title>Add Book</title>
     </head>
     <body bgcolor="#ECD8C6">
         <header>
             <table>
-                <tr><td bgcolor="#603E20"><img src="../../src/Banner.jpg" alt="Banner"  width="1290" height="100"></td></tr>
+                <tr><td bgcolor="#603E20"><img src="../src/Banner.jpg" alt="Banner"  width="1290" height="100"></td></tr>
                 <tr>
                     <td bgcolor="#603E20">
-                        <marquee scrollamount="20"><h1><font color="white">Edit Book</font></h1></marquee>
+                        <marquee scrollamount="20"><h1><font color="white">Add Book</font></h1></marquee>
                     </td>
                 </tr>
             </table>
         </header>
 
-        <form>
+        <form action="../Includes/addbook.inc.php" method="POST">
             <table align="center">
                 <!-- Space -->
                 <tr><td height="50" colspan=5></td></tr>
@@ -32,7 +43,7 @@
                             <tr>
                                 <td></td>
                                 <td>
-                                    <input  required type="text" name="title" value="You've Reached Sam" size="90">
+                                    <input  required type="text" name="title" placeholder="Insert Title" size="90">
                                 </td>
                             </tr>
 
@@ -52,10 +63,10 @@
                                     <table>
                                         <tr>
                                             <td width="100">
-                                                <input type="radio" name="language" value="Malay">Malay
+                                                <input type="radio" name="language" value="Malay" required>Malay
                                             </td>
-                                            <td width="100">
-                                                <input type="radio" name="language" value="English" checked>English
+                                            <td>
+                                                <input type="radio" name="language" value="English">English
                                             </td>
                                             <td>
                                                 <input type="radio" name="language" value="Chinese">Chinese
@@ -78,7 +89,7 @@
                             <tr>
                                 <td></td>
                                 <td>
-                                    <input  required type="text" name="author" value="Dustin Thao" size="90">
+                                    <input  required type="text" name="author" placeholder="Insert Author" size="90">
                                 </td>
                             </tr>
 
@@ -95,7 +106,7 @@
                             <tr>
                                 <td></td>
                                 <td>
-                                    <input type="text" name="author" value="Wednesday Books" size="90">
+                                    <input type="text" name="publisher" placeholder="Insert Publisher" size="90">
                                 </td>
                             </tr>
                             <!-- Space -->
@@ -107,16 +118,10 @@
                                     <table>
                                         <tr>
                                             <!-- To push buttons to the right  -->
-                                            <td align ="right" width="200"></td>
+                                            <td align ="right" width="270"></td>
 
-                                            <!-- Edit Book Button -->
-                                            <td><button type="submit">Edit Book</button></td>
-
-                                            <!-- Button seperator  -->
-                                            <td width="10"></td>
-
-                                            <!-- Delete Book Button -->
-                                            <td><button type="submit">Delete Book</button></td>
+                                            <!-- Add Book Button -->
+                                            <td><button type="submit">Add Book</button></td>
 
                                             <!-- Button seperator  -->
                                             <td width="10"></td>
@@ -135,7 +140,7 @@
                     </td>
                     <td>
                         <!-- Back Button -->
-                        <button type="submit" formaction="../CatalogueAdmin.html">Back</button>
+                        <button type="submit" formaction="CatalogueAdmin.php" formnovalidate>Back</button>
                     </td>
                 </tr>
             </table>

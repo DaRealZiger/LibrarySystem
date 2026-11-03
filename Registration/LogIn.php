@@ -1,6 +1,18 @@
+<?php
+require_once "../Includes/function.inc.php";
+session_start();
+if (isLoggedIn()) {
+    if (isAdmin()) {
+        header("location:".BASEURL."/Admin/CatalogueAdmin.php");
+        exit();
+    }
+header("location:".BASEURL."/User/CatalogueUser.php");
+exit();
+}
+?>
 <html>
     <head>
-        <title>Sign Up</title>
+        <title>Log In</title>
     </head>
     <body bgcolor="#ECD8C6">
         <header>
@@ -8,13 +20,13 @@
                 <tr><td bgcolor="#603E20"><img src="../src/Banner.jpg" alt="Banner"  width="1290" height="100"></td></tr>
                 <tr>
                     <td bgcolor="#603E20">
-                        <marquee scrollamount="20"><h1><font color="white">Sign Up</font></h1></marquee>
+                        <marquee scrollamount="20"><h1><font color="white">Log In</font></h1></marquee>
                     </td>
                 </tr>
             </table>
         </header>
 
-        <form>
+        <form action="../Includes/login.inc.php" method="POST">
             <table align="center">
                 <!-- Space -->
                 <tr><td height="50" colspan=5></td></tr>
@@ -28,7 +40,7 @@
                                 <td>Username</td>
                             </tr>
 
-                            <!-- Username fiel -->
+                            <!-- Username Field -->
                             <tr>
                                 <td></td>
                                 <td>
@@ -49,26 +61,10 @@
                             <tr>
                                 <td></td>
                                 <td>
-                                    <input required type="text" name="pwd" placeholder="Insert Password" size="90">
+                                    <input required type="password" name="psw" placeholder="Insert Password" size="90">
                                 </td>
                             </tr>
 
-                            <!-- Space -->
-                            <tr><td height="50" colspan=5></td></tr>
-
-                            <!-- Confirm Password -->
-                            <tr>
-                                <td></td>
-                                <td>Confirm Password</td>
-                            </tr>
-
-                            <!-- Confirm Password Field -->
-                            <tr>
-                                <td></td>
-                                <td>
-                                    <input required type="text" name="confpwd" placeholder="Confirm Password" size="90">
-                                </td>
-                            </tr>
                             <!-- Space -->
                             <tr><td height="25" colspan=5></td></tr>
 
@@ -80,8 +76,8 @@
                                             <!-- To push buttons to the right  -->
                                             <td align ="right" width="270"></td>
 
-                                            <!-- Sign Up Button -->
-                                            <td><button type="submit">Sign Up</button></td>
+                                            <!-- Log In Button -->
+                                            <td><button type="submit">Log In</button></td>
 
                                             <!-- Button seperator  -->
                                             <td width="10"></td>
@@ -99,10 +95,20 @@
                     <td width="605">
                     </td>
                     <td>
-                        <!-- Back Button -->
-                        <button type="submit" formaction="LogIn.html" formnovalidate>Back</button>
+                        <!-- Sign Up Button -->
+                        <button type="submit" formaction="SignUp.php" formnovalidate>SignUp</button>
                     </td>
                 </tr>
+            <?php
+                if (isset($_GET["error"])){
+                    if($_GET["error"] == "WrongUsername") {
+                        echo '<p>Incorrect Username</p>';
+                    } 
+                    else if($_GET["error"] == "WrongPassword") {
+                        echo '<p>Incorrect Password</p>';
+                    }
+                }
+            ?>
             </table>
         </form>
     </body>
