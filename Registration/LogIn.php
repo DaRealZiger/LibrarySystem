@@ -61,7 +61,7 @@ exit();
                             <tr>
                                 <td></td>
                                 <td>
-                                    <input required type="text" name="psw" placeholder="Insert Password" size="90">
+                                    <input required type="password" name="psw" placeholder="Insert Password" size="90">
                                 </td>
                             </tr>
 

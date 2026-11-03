@@ -8,7 +8,7 @@ function dbconn(){
     $serverName = 'localhost';
     $username = 'root';
     $password = '';
-    $dbName = 'Lab';
+    $dbName = 'MiniProject';
 
     $conn = new mysqli(
         $serverName, 

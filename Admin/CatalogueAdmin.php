@@ -9,7 +9,6 @@ if (!isLoggedIn()) {
     exit();
 }
 ?>
-?>
 <html>
     <head>
         <title>Catalogue Admin</title>
