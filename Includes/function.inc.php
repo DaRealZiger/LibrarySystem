@@ -209,3 +209,31 @@ function adminBookTable($conn){
             echo "</tr>";
     }
 }
+
+function userTable($conn){
+    $sql = "SELECT 
+            br.Username,
+            b.BookName,
+            DATE_FORMAT(br.DueDate, '%d-%m-%Y') AS DueDate
+        FROM ".BOOKTABLE." b
+        INNER JOIN ".BORROWTABLE." br
+            ON b.BookID = br.BookID
+        ";
+
+    $result = $conn ->query($sql);
+    if ($result -> num_rows > 0) {
+        while ($row = $result -> fetch_assoc()){
+            echo "<tr height = '58'>";
+            echo "<td>&emsp;".$row["Username"]."</td>";
+            echo "<td>&emsp;".$row["BookName"]."</td>";
+            echo "<td>&emsp;<font color='Red'>".$row["DueDate"]."</font></td>";
+            }
+            echo "</tr>";
+        } else {
+            echo "<tr height = '58'>";
+            for ($i=0; $i < 3; $i++) { 
+                echo "<td align='center'>-</td>";
+            }
+            echo "</tr>";
+    }
+}
