@@ -19,7 +19,7 @@ echo $_SESSION["Username"];
             </table>
         </header>
 
-        <form>
+        <form method="POST">
             <table align="center">
 
                 <!-- Space -->

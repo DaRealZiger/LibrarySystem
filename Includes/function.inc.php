@@ -55,6 +55,7 @@ function userBookTable($conn){
             echo "<td>&emsp;<font color='Red'>".$row["DisplayStatus"]."</font></td>";
             } else{
             echo "<td>&emsp;".$row["DisplayStatus"]."</td>";
+            echo "<td><button type='submit' formaction='../Includes/borrow.inc.php' name='BookID' value='".$row["BookID"]."'>Borrow</button></td>";
             }
             echo "</tr>";
         } 
