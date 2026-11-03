@@ -1,7 +1,13 @@
 <?php
+require_once "../Includes/function.inc.php";
 session_start();
-echo $_SESSION["Role"]."&nbsp";
-echo $_SESSION["Username"];
+if (isAdmin()) {
+    header("location:".BASEURL."/Admin/CatalogueAdmin.html");
+    exit();
+} elseif (!isLoggedIn()) {
+    header("location:".BASEURL."/Registration/LogIn.php");
+    exit();
+}
 ?>
 <html>
     <head>
