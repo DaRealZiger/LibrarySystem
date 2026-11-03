@@ -36,12 +36,12 @@ echo $_SESSION["Username"];
                                 <td width="200" align="center"><b>Publisher</b></td>
                                 <td width="150" align="center"><b>Status</b></td>
                             </tr>
+
                             <?php
                             require_once "../Includes/function.inc.php";
                             $conn = dbconn();
                             userBookTable($conn);
                             ?>
-
 
                         </table>
                     </td></tr>
@@ -52,7 +52,7 @@ echo $_SESSION["Username"];
             <tr>
                 <!-- View Borrowed Button -->
                 <td width="950">
-                    <button type="submit">View Borrowed</button>
+                    <button type="submit" formaction="BorrowedBooks.php">View Borrowed</button>
                 </td>
 
                     <!-- Log Out Button -->

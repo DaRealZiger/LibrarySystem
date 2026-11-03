@@ -112,11 +112,53 @@ function usrExists($conn, $username) {
 }
 
 function stmtFailed() {
-    $previousPage = $_SERVER['HTTP_REFERER'] ?? BASEURL . "/Registration/Signup.html";
+    $previousPage = $_SERVER['HTTP_REFERER'];
     
     $urlPart = explode('?', $previousPage);
     $baseURL = $urlPart[0];
     
     header("Location: " . $baseURL . "?error=stmtFailed");
     exit();
+}
+
+
+function borrowedBookTable($conn){
+    $sql = "SELECT 
+            b.BookID,
+            b.BookName,
+            b.Language,
+            b.Author,
+            b.Publisher,
+            DATE_FORMAT(br.DueDate, '%d-%m-%Y') AS DueDate
+        FROM ".BOOKTABLE." b
+        INNER JOIN ".BORROW." br
+            ON b.BookID = br.BookID
+            AND br.Username = '".$_SESSION['Username']."'
+        WHERE NOT EXISTS (
+            SELECT 1
+            FROM BorrowedBook other
+            WHERE other.BookID = b.BookID
+            AND other.Username != '".$_SESSION['Username']."'
+        )";
+
+    $result = $conn ->query($sql);
+    if ($result -> num_rows > 0) {
+        while ($row = $result -> fetch_assoc()){
+            echo "<tr height = '58'>";
+            echo "<td>&emsp;".$row["BookID"]."</td>";
+            echo "<td>&emsp;".$row["BookName"]."</td>";
+            echo "<td>&emsp;".$row["Language"]."</td>";
+            echo "<td>&emsp;".$row["Author"]."</td>";
+            echo "<td>&emsp;".$row["Publisher"]."</td>";
+            echo "<td>&emsp;<font color='Red'>".$row["DueDate"]."</font></td>";
+            echo "<td><button type='submit' formaction='../Includes/return.inc.php' name='BookID' value='".$row["BookID"]."'>Return</button></td>";
+            }
+            echo "</tr>";
+        } else {
+            echo "<tr height = '58'>";
+            for ($i=0; $i < 6; $i++) { 
+                echo "<td align='center'>-</td>";
+            }
+            echo "</tr>";
+    }
 }

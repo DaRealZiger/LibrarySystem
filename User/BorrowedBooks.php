@@ -1,3 +1,8 @@
+<?php
+session_start();
+echo $_SESSION["Role"]."&nbsp";
+echo $_SESSION["Username"];
+?>
 <html>
     <head>
         <title>Borrowed Books</title>
@@ -14,7 +19,7 @@
             </table>
         </header>
 
-        <form>
+        <form method="POST">
             <table align="center">
                 <!-- Space -->
                 <tr><td height="50" colspan=5></td></tr>
@@ -22,7 +27,7 @@
                         <table align="center" border="1">
                             <!-- Table Header -->
                             <tr height="40">
-                                <td width="50" align="center"><b>No.</b></td>
+                                <td width="50" align="center"><b>BookID</b></td>
                                 <td width="200" align="center"><b>Title</b></td>
                                 <td width="150" align="center"><b>Language</b></td>
                                 <td width="200" align="center"><b>Author</b></td>
@@ -30,16 +35,12 @@
                                 <td width="150" align="center"><b>Status</b></td>
                             </tr>
 
-                            <!-- First Book -->
-                            <tr height="58">
-                                <td>&emsp;1.</td>
-                                <td>&emsp;You've Reached Sam</td>
-                                <td>&emsp;English</td>
-                                <td>&emsp;Dustin Thao</td>
-                                <td>&emsp;Wednesday Books</td>
-                                <td>&emsp;<font color="Red">Due:31/10/2026</font></td>
-                                <td><button type="submit">Return</button></td>
-                            </tr>
+                            <?php
+                            require_once "../Includes/function.inc.php";
+                            $conn = dbconn();
+                            borrowedBookTable($conn);
+                            ?>
+
                         </table>
                     </td></tr>
             </table>
@@ -51,7 +52,7 @@
 
                 <!-- Back Button  -->
                 <td align="right"><br>
-                    <button type="submit" formaction="CatalogueUser.html">Back</button></td>
+                    <button type="submit" formaction="CatalogueUser.php">Back</button></td>
                 </tr>
             </table>
         </form>
