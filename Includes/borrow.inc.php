@@ -10,7 +10,7 @@ $borrowDate = $date -> format('Y-m-d');
 $date -> modify('+2 weeks');
 $dueDate = $date -> format('Y-m-d');
 
-$sql = "INSERT INTO ".BORROW." (BookID, Username, BorrowedDate, DueDate)
+$sql = "INSERT INTO ".BORROWTABLE." (BookID, Username, BorrowedDate, DueDate)
 VALUES (?, ?, '$borrowDate', '$dueDate')";
 $stmt = mysqli_stmt_init($conn);
 

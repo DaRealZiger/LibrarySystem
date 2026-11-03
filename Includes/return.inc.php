@@ -5,7 +5,7 @@ $conn = dbconn();
 $BookID = $_POST["BookID"];
 $previousPage = $_SERVER['HTTP_REFERER'];
 
-$sql = "DELETE FROM ".BORROW." WHERE BookID = '".$BookID."'";
+$sql = "DELETE FROM ".BORROWTABLE." WHERE BookID = '".$BookID."'";
 
 if ($conn -> query($sql)) {
     header("location:".$previousPage);

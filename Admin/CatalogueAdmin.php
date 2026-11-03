@@ -20,7 +20,7 @@ echo $_SESSION["Role"];
             </table>
         </header>
 
-        <form>
+        <form method="POST">
             <table align="center">
 
                 <!-- Space -->

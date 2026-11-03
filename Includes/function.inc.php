@@ -1,7 +1,7 @@
 <?php 
 const BOOKTABLE = 'Books';
 const USERTABLE = 'Users';
-const BORROW = 'BorrowedBook';
+const BORROWTABLE = 'BorrowedBook';
 const BASEURL = 'http://localhost:8080/Library%20System';
 
 function dbconn(){
@@ -32,7 +32,7 @@ function userBookTable($conn){
             b.Publisher,
             COALESCE(DATE_FORMAT(br.DueDate, '%d-%m-%Y'), b.Status) AS DisplayStatus
         FROM ".BOOKTABLE." b
-        LEFT JOIN ".BORROW." br
+        LEFT JOIN ".BORROWTABLE." br
             ON b.BookID = br.BookID
             AND br.Username = '".$_SESSION['Username']."'
         WHERE NOT EXISTS (
@@ -121,7 +121,6 @@ function stmtFailed() {
     exit();
 }
 
-
 function borrowedBookTable($conn){
     $sql = "SELECT 
             b.BookID,
@@ -131,7 +130,7 @@ function borrowedBookTable($conn){
             b.Publisher,
             DATE_FORMAT(br.DueDate, '%d-%m-%Y') AS DueDate
         FROM ".BOOKTABLE." b
-        INNER JOIN ".BORROW." br
+        INNER JOIN ".BORROWTABLE." br
             ON b.BookID = br.BookID
             AND br.Username = '".$_SESSION['Username']."'
         WHERE NOT EXISTS (
@@ -163,7 +162,6 @@ function borrowedBookTable($conn){
     }
 }
 
-
 function adminBookTable($conn){
     $sql = "SELECT 
             b.BookID,
@@ -174,7 +172,7 @@ function adminBookTable($conn){
             br.Username,
             COALESCE(DATE_FORMAT(br.DueDate, '%d-%m-%Y'), b.Status) AS DisplayStatus
         FROM ".BOOKTABLE." b
-        LEFT JOIN ".BORROW." br
+        LEFT JOIN ".BORROWTABLE." br
             ON b.BookID = br.BookID
         ";
 
@@ -192,7 +190,7 @@ function adminBookTable($conn){
             echo "<td>&emsp;<font color='Red'>".$row["DisplayStatus"]."</font></td>";
             } else{
             echo "<tr height = '58'>";
-            echo "<td><button>Edit</button></td>";
+            echo "<td><button type='submit' formaction='EditBook.php' name='BookID' value='".$row["BookID"]."'>Edit</button></td>";
             echo "<td>&emsp;".$row["BookID"]."</td>";
             echo "<td>&emsp;".$row["BookName"]."</td>";
             echo "<td>&emsp;".$row["Language"]."</td>";
