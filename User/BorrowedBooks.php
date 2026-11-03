@@ -2,7 +2,7 @@
 require_once "../Includes/function.inc.php";
 session_start();
 if (isAdmin()) {
-    header("location:".BASEURL."/Admin/CatalogueAdmin.html");
+    header("location:".BASEURL."/Admin/CatalogueAdmin.php");
     exit();
 } elseif (!isLoggedIn()) {
     header("location:".BASEURL."/Registration/LogIn.php");

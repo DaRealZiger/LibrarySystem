@@ -1,3 +1,9 @@
+<?php
+session_start();
+echo $_SESSION["Username"];
+echo "&nbsp";
+echo $_SESSION["Role"];
+?>
 <html>
     <head>
         <title>Catalogue Admin</title>
@@ -24,7 +30,7 @@
                             <!-- Table Header -->
                             <tr height="40">
                                 <td width="50"></td>
-                                <td width="50" align="center"><b>No.</b></td>
+                                <td width="50" align="center"><b>BookID</b></td>
                                 <td width="200" align="center"><b>Title</b></td>
                                 <td width="150" align="center"><b>Language</b></td>
                                 <td width="200" align="center"><b>Author</b></td>
@@ -33,45 +39,12 @@
                                 <td width="200" align="center"><b>User</b></td>
                             </tr>
 
-                            <!-- First Book -->
-                            <tr height="50">
-                                <td>
-                                    <button type="submit" formaction="Edit Books/EditBook(1).html">Edit</button>
-                                </td>
-                                <td>&emsp;1.</td>
-                                <td>&emsp;Patung Hina Hidup?</td>
-                                <td>&emsp;Malay</td>
-                                <td>&emsp;Honobu Yonezawa</td>
-                                <td>&emsp;Kadokawa</td>
-                                <td>&emsp;Available</td>
-                            </tr>
+                            <?php
+                            require_once "../Includes/function.inc.php";
+                            $conn = dbconn();
+                            adminBookTable($conn);
+                            ?>
 
-                            <!-- Second Book -->
-                            <tr height="50">
-                                <td>
-                                    <button type="submit" formaction="Edit Books/EditBook(2).html">Edit</button>
-                                </td>
-                                <td>&emsp;2.</td>
-                                <td>&emsp;You've Reached Sam</td>
-                                <td>&emsp;English</td>
-                                <td>&emsp;Dustin Thao</td>
-                                <td>&emsp;Wednesday Books</td>
-                                <td>&emsp;<font color="Red">Due:31/10/2026</font></td>
-                                <td>&emsp;Sasha</td>
-                            </tr>
-
-                            <!-- Third Book -->
-                            <tr height="50">
-                                <td>
-                                    <button type="submit" formaction="Edit Books/EditBook(3).html">Edit</button>
-                                </td>
-                                <td>&emsp;3.</td>
-                                <td>&emsp;White Tear</td>
-                                <td>&emsp;Chinese</td>
-                                <td>&emsp;Wei Jun</td>
-                                <td>&emsp;Gempak Starz</td>
-                                <td>&emsp;Available</td>
-                            </tr>
                         </table>
                     </td></tr>
             </table>

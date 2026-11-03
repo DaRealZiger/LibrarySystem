@@ -162,3 +162,52 @@ function borrowedBookTable($conn){
             echo "</tr>";
     }
 }
+
+
+function adminBookTable($conn){
+    $sql = "SELECT 
+            b.BookID,
+            b.BookName,
+            b.Language,
+            b.Author,
+            b.Publisher,
+            br.Username,
+            COALESCE(DATE_FORMAT(br.DueDate, '%d-%m-%Y'), b.Status) AS DisplayStatus
+        FROM ".BOOKTABLE." b
+        LEFT JOIN ".BORROW." br
+            ON b.BookID = br.BookID
+        ";
+
+    $result = $conn ->query($sql);
+    if ($result -> num_rows > 0) {
+        while ($row = $result -> fetch_assoc()){
+            if ($row["DisplayStatus"] !== 'Available') {
+            echo "<tr height = '58'>";
+            echo "<td></td>";
+            echo "<td>&emsp;".$row["BookID"]."</td>";
+            echo "<td>&emsp;".$row["BookName"]."</td>";
+            echo "<td>&emsp;".$row["Language"]."</td>";
+            echo "<td>&emsp;".$row["Author"]."</td>";
+            echo "<td>&emsp;".$row["Publisher"]."</td>";
+            echo "<td>&emsp;<font color='Red'>".$row["DisplayStatus"]."</font></td>";
+            } else{
+            echo "<tr height = '58'>";
+            echo "<td><button>Edit</button></td>";
+            echo "<td>&emsp;".$row["BookID"]."</td>";
+            echo "<td>&emsp;".$row["BookName"]."</td>";
+            echo "<td>&emsp;".$row["Language"]."</td>";
+            echo "<td>&emsp;".$row["Author"]."</td>";
+            echo "<td>&emsp;".$row["Publisher"]."</td>";
+            echo "<td>&emsp;".$row["DisplayStatus"]."</td>";
+            }
+            echo "<td>&emsp;".$row["Username"]."</td>";
+            echo "</tr>";
+        } 
+    }else {
+            echo "<tr height = '58'>";
+            for ($i=0; $i < 6; $i++) { 
+                echo "<td align='center'>-</td>";
+            }
+            echo "</tr>";
+    }
+}
