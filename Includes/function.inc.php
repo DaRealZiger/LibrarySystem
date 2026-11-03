@@ -1,6 +1,7 @@
 <?php 
 const BOOKTABLE = 'Books';
 const USERTABLE = 'Users';
+const BORROW = 'BorrowedBook';
 const BASEURL = 'http://localhost:8080/Library%20System';
 
 function dbconn(){
@@ -23,28 +24,45 @@ function dbconn(){
 }
 
 function userBookTable($conn){
-    $no = 1;
-    $sql = "SELECT BookName, Language, Author, Publisher, Status FROM " . BOOKTABLE;
+    $sql = "SELECT 
+            b.BookID,
+            b.BookName,
+            b.Language,
+            b.Author,
+            b.Publisher,
+            COALESCE(DATE_FORMAT(br.DueDate, '%d-%m-%Y'), b.Status) AS DisplayStatus
+        FROM ".BOOKTABLE." b
+        LEFT JOIN ".BORROW." br
+            ON b.BookID = br.BookID
+            AND br.Username = '".$_SESSION['Username']."'
+        WHERE NOT EXISTS (
+            SELECT 1
+            FROM BorrowedBook other
+            WHERE other.BookID = b.BookID
+            AND other.Username != '".$_SESSION['Username']."'
+        )";
+
     $result = $conn ->query($sql);
     if ($result -> num_rows > 0) {
         while ($row = $result -> fetch_assoc()){
             echo "<tr height = '58'>";
-            echo "<td>&emsp;".$no++."</td>";
+            echo "<td>&emsp;".$row["BookID"]."</td>";
             echo "<td>&emsp;".$row["BookName"]."</td>";
             echo "<td>&emsp;".$row["Language"]."</td>";
             echo "<td>&emsp;".$row["Author"]."</td>";
             echo "<td>&emsp;".$row["Publisher"]."</td>";
-            echo "<td>&emsp;".$row["Status"]."</td>";
+            if ($row["DisplayStatus"] !== 'Available') {
+            echo "<td>&emsp;<font color='Red'>".$row["DisplayStatus"]."</font></td>";
+            } else{
+            echo "<td>&emsp;".$row["DisplayStatus"]."</td>";
+            }
             echo "</tr>";
         } 
     }else {
             echo "<tr height = '58'>";
-            echo "<td align='center'>-</td>";
-            echo "<td align='center'>-</td>";
-            echo "<td align='center'>-</td>";
-            echo "<td align='center'>-</td>";
-            echo "<td align='center'>-</td>";
-            echo "<td align='center'>-</td>";
+            for ($i=0; $i < 6; $i++) { 
+                echo "<td align='center'>-</td>";
+            }
             echo "</tr>";
     }
 }

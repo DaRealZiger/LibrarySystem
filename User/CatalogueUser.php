@@ -1,3 +1,8 @@
+<?php
+session_start();
+echo $_SESSION["Role"]."&nbsp";
+echo $_SESSION["Username"];
+?>
 <html>
     <head>
         <title>Catalogue</title>
@@ -24,7 +29,7 @@
 
                             <!-- Table Header -->
                             <tr height="40">
-                                <td width="50" align="center"><b>No.</b></td>
+                                <td width="50" align="center"><b>BookID</b></td>
                                 <td width="200" align="center"><b>Title</b></td>
                                 <td width="150" align="center"><b>Language</b></td>
                                 <td width="200" align="center"><b>Author</b></td>
