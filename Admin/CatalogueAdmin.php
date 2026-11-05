@@ -1,25 +1,28 @@
 <?php
+/* ------------------------- Call all functions  ------------------------- */
 require_once "../Includes/function.inc.php";
+
 session_start();
+
 if (!isLoggedIn()) {
-    header("location:".BASEURL."/Registration/LogIn.php");
+    header("location:".BASEURL."/Registration/LogIn.php"); /* If not logged in return to log in page */
     exit();
 } elseif (!isAdmin()) {
-    header("location:".BASEURL."/User/CatalogueUser.php");
+    header("location:".BASEURL."/User/CatalogueUser.php"); /* If Admin redirect to admin page */
     exit();
 }
 ?>
 <html>
     <head>
-        <title>Catalogue Admin</title>
+        <title>Catalogue Admin</title> <!-- Set Tab Name -->
     </head>
     <body bgcolor="#ECD8C6">
         <header>
             <table width="100%">
-                <?php banner() ?>
+                <?php banner() ?> <!-- Set Banner -->
                 <tr>
                     <td bgcolor="#603E20">
-                        <marquee scrollamount="20"><h1><font color="white">Catalogue Admin</font></h1></marquee>
+                        <marquee scrollamount="20"><h1><font color="white">Catalogue Admin</font></h1></marquee> <!-- Set Scrolling Title -->
                     </td>
                 </tr>
             </table>
@@ -44,6 +47,7 @@ if (!isLoggedIn()) {
                                 <td width="200" align="center"><b>User</b></td>
                             </tr>
 
+                            <!-- --------- Show Admin's Book Table --------- -->
                             <?php
                             $conn = dbconn();
                             adminBookTable($conn);

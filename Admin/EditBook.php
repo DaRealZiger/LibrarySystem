@@ -1,28 +1,35 @@
 <?php
+/* ------------------------- Call all functions  ------------------------- */
 require_once "../Includes/function.inc.php";
+
+/* ----------------- Ensure this file is accessed correctly ----------------- */
 if ($_SERVER["REQUEST_METHOD"] !== "POST") {
     header("location:".BASEURL."/Admin/CatalogueAdmin.php");
     exit();
 }
+
 session_start();
+
+/* ---------------------------- Define variables ---------------------------- */
 $bookID = $_POST["BookID"];
 $conn = dbconn();
 
+/* ------------------------------ Prepare sql  ------------------------------ */
 $sql = "SELECT BookID, BookName, Language, Author, Publisher, Status FROM ".BOOKTABLE." WHERE BookID =".$bookID.";";
 $result = $conn -> query($sql);
 $row = $result ->fetch_assoc();
 ?>
 <html>
     <head>
-        <title>Edit Book</title>
+        <title>Edit Book</title> <!-- Set Tab Name -->
     </head>
     <body bgcolor="#ECD8C6">
         <header>
             <table width="100%">
-                <?php banner() ?>
+                <?php banner() ?> <!-- Set Banner -->
                 <tr>
                     <td bgcolor="#603E20">
-                        <marquee scrollamount="20"><h1><font color="white">Edit Book</font></h1></marquee>
+                        <marquee scrollamount="20"><h1><font color="white">Edit Book</font></h1></marquee> <!-- Set Scrolling Title -->
                     </td>
                 </tr>
             </table>
