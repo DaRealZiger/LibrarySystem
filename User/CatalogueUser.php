@@ -44,7 +44,6 @@ if (isAdmin()) {
                             </tr>
 
                             <?php
-                            require_once "../Includes/function.inc.php";
                             $conn = dbconn();
                             userBookTable($conn);
                             ?>
