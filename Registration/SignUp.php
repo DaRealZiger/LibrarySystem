@@ -1,26 +1,28 @@
 <?php
+/* ------------------------- Call all functions  ------------------------- */
 require_once "../Includes/function.inc.php";
+
 session_start();
 if (isLoggedIn()) {
     if (isAdmin()) {
-        header("location:".BASEURL."/Admin/CatalogueAdmin.php");
+        header("location:".BASEURL."/Admin/CatalogueAdmin.php"); /* If Admin redirect to admin page */
         exit();
     }
-header("location:".BASEURL."/User/CatalogueUser.php");
+header("location:".BASEURL."/User/CatalogueUser.php"); /* If logged in redirect to user page */
 exit();
 }
 ?>
 <html>
     <head>
-        <title>Sign Up</title>
+        <title>Sign Up</title> <!-- Set Tab Name -->
     </head>
     <body bgcolor="#ECD8C6">
         <header>
             <table width="100%">
-                <?php banner() ?>
+                <?php banner() ?> <!-- Set Banner -->
                 <tr>
                     <td bgcolor="#603E20">
-                        <marquee scrollamount="20"><h1><font color="white">Sign Up</font></h1></marquee>
+                        <marquee scrollamount="20"><h1><font color="white">Sign Up</font></h1></marquee> <!-- Set Scrolling Title -->
                     </td>
                 </tr>
             </table>
@@ -116,6 +118,7 @@ exit();
                     </td>
                 </tr>
 
+            <!-- ----------------- Show Error Message  ----------------- -->
             <?php
                 if (isset($_GET["error"])){
                     if($_GET["error"] == "stmtFailed") {
