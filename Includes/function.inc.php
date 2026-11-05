@@ -237,3 +237,7 @@ function userTable($conn){
             echo "</tr>";
     }
 }
+
+function banner() {
+    echo '<tr><td bgcolor="#603E20"><img src="../src/Banner.jpg" alt="Banner"  width="1290" height="100"></td></tr>';
+}

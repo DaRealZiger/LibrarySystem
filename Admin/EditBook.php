@@ -19,7 +19,7 @@ $row = $result ->fetch_assoc();
     <body bgcolor="#ECD8C6">
         <header>
             <table>
-                <tr><td bgcolor="#603E20"><img src="../src/Banner.jpg" alt="Banner"  width="1290" height="100"></td></tr>
+                <?php banner() ?>
                 <tr>
                     <td bgcolor="#603E20">
                         <marquee scrollamount="20"><h1><font color="white">Edit Book</font></h1></marquee>
