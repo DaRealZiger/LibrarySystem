@@ -8,7 +8,7 @@ session_start();
 $bookID = $_POST["BookID"];
 $conn = dbconn();
 
-$sql = "SELECT BookID, BookName, Language, Author, Publisher FROM ".BOOKTABLE." WHERE BookID =".$bookID.";";
+$sql = "SELECT BookID, BookName, Language, Author, Publisher, Status FROM ".BOOKTABLE." WHERE BookID =".$bookID.";";
 $result = $conn -> query($sql);
 $row = $result ->fetch_assoc();
 ?>
@@ -114,6 +114,34 @@ $row = $result ->fetch_assoc();
                                 <td></td>
                                 <td>
                                     <input type="text" name="publisher" value="<?=htmlspecialchars($row['Publisher'])?>" size="90">
+                                </td>
+                            </tr>
+
+                            <!-- Space -->
+                            <tr><td height="30" colspan=5></td></tr>
+
+                            <!-- Status -->
+                            <tr>
+                                <td></td>
+                                <td>Status</td>
+                            </tr>
+
+                            <!-- Status Choice -->
+                            <tr>
+                                <td></td>
+                                <td>
+                                    <table>
+                                        <tr>
+                                            <td width="150">
+                                                <input type="radio" name="status" value="Available"
+                                                 <?= $row["Status"] === "Available" ? "checked" : ""?>>Available
+                                            </td>
+                                            <td width="200">
+                                                <input type="radio" name="status" value="Unavailable"
+                                                 <?= $row["Status"] === "Unavailable" ? "checked" : ""?>>Unavailable
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </td>
                             </tr>
                             <!-- Space -->

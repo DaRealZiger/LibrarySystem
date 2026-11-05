@@ -179,7 +179,7 @@ function adminBookTable($conn){
     $result = $conn ->query($sql);
     if ($result -> num_rows > 0) {
         while ($row = $result -> fetch_assoc()){
-            if ($row["DisplayStatus"] !== 'Available') {
+            if ($row["DisplayStatus"] !== 'Available' && $row["DisplayStatus"] !== 'Unavailable') {
             echo "<tr height = '58'>";
             echo "<td></td>";
             echo "<td>&emsp;".$row["BookID"]."</td>";
