@@ -15,7 +15,7 @@ if (isAdmin()) {
     </head>
     <body bgcolor="#ECD8C6">
         <header>
-            <table>
+            <table width="100%">
                 <?php banner() ?>
                 <tr>
                     <td bgcolor="#603E20">

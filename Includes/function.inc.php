@@ -63,7 +63,7 @@ function isAdmin(): bool {
 
 /* ----------------------------- Create Banner  ----------------------------- */
 function banner() {
-    echo '<tr><td bgcolor="#603E20"><img src="../src/Banner.jpg" alt="Banner"  width="1290" height="100"></td></tr>';
+    echo '<tr><td bgcolor="#603E20"><img src="../src/Banner.jpg" alt="Banner" width="100%" height="100"></td></tr>';
 }
 
 /* ------------------------ Output Who is logged in  ------------------------ */
