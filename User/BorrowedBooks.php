@@ -1,30 +1,33 @@
 <?php
+/* ------------------------- Call all functions  ------------------------- */
 require_once "../Includes/function.inc.php";
+
 session_start();
+
 if (isAdmin()) {
-    header("location:".BASEURL."/Admin/CatalogueAdmin.php");
+    header("location:".BASEURL."/Admin/CatalogueAdmin.php"); /* If Admin redirect to admin page */
     exit();
 } elseif (!isLoggedIn()) {
-    header("location:".BASEURL."/Registration/LogIn.php");
+    header("location:".BASEURL."/Registration/LogIn.php"); /* If not logged in return to log in page */
     exit();
 }
 ?>
 <html>
     <head>
-        <title>Borrowed Books</title>
+        <title>Borrowed Books</title> <!-- Set Tab Name -->
     </head>
     <body bgcolor="#ECD8C6">
         <header>
             <table width="100%">
-                <?php banner() ?>
+                <?php banner() ?> <!-- Set Banner -->
                 <tr>
                     <td bgcolor="#603E20">
-                        <marquee scrollamount="20"><h1><font color="white">Borrowed Books</font></h1></marquee>
+                        <marquee scrollamount="20"><h1><font color="white">Borrowed Books</font></h1></marquee> <!-- Set Scrolling Title -->
                     </td>
                 </tr>
             </table>
         </header>
-        <?php whoami() ?>
+        <?php whoami() ?> <!-- Display Username -->
 
         <form method="POST">
             <table align="center">
@@ -42,6 +45,7 @@ if (isAdmin()) {
                                 <td width="150" align="center"><b>Status</b></td>
                             </tr>
 
+                            <!-- ------ Show Borrowed Book's by user  ------ -->
                             <?php
                             $conn = dbconn();
                             borrowedBookTable($conn);
