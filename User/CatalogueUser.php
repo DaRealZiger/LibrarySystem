@@ -24,6 +24,7 @@ if (isAdmin()) {
                 </tr>
             </table>
         </header>
+        <?php whoami() ?>
 
         <form method="POST">
             <table align="center">
