@@ -122,7 +122,7 @@ exit();
                         echo '<p>Something went wrong try again!</p>';
                     } 
                     else if($_GET["error"] == "UserExists") {
-                        echo '<p>Your username is taken</p>';
+                        echo '<p>Username is taken</p>';
                     }
                     else if($_GET['error'] == 'PswDontMatch') {
                         echo '<p>Password and Confirmation password don\'t match</p>';

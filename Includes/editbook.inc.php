@@ -1,5 +1,8 @@
 <?php
+/* ------------------------- Call all functions  ------------------------- */
 require_once "function.inc.php";
+
+/* --------------------------- Defining Variables --------------------------- */
 $conn = dbconn();
 $bookID = $_POST["BookID"];
 $title = $_POST["title"];
@@ -8,9 +11,11 @@ $author = $_POST["author"];
 $publisher= $_POST["publisher"];
 $status = $_POST["status"];
 
+/* ------------------------ Preparing sql statement  ------------------------ */
 $sql = "UPDATE ".BOOKTABLE." SET BookName = ?, Language = ?, Author = ?, Publisher = ?, Status = ? WHERE BookID = ".$bookID;
 $stmt = mysqli_stmt_init($conn);
 
+/* ------------------------ Executing sql statement  ------------------------ */
 if (mysqli_stmt_prepare($stmt, $sql)) {
     mysqli_stmt_bind_param($stmt, "sssss", $title, $language, $author, $publisher, $status);
     mysqli_stmt_execute($stmt);

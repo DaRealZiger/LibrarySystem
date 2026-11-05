@@ -1,9 +1,17 @@
 <?php 
+/* -------------------------------------------------------------------------- */
+/*                              Define Constant                              */
+/* -------------------------------------------------------------------------- */
 const BOOKTABLE = 'Books';
 const USERTABLE = 'Users';
 const BORROWTABLE = 'BorrowedBook';
-const BASEURL = 'http://localhost:8080/Library%20System';
+const BASEURL = 'http://localhost:8080/LibrarySystem';
 
+/* -------------------------------------------------------------------------- */
+/*                                    Sql                                     */
+/* -------------------------------------------------------------------------- */
+
+/* ---------------------------- Start Connection ---------------------------- */
 function dbconn(){
     $serverName = 'localhost';
     $username = 'root';
@@ -23,6 +31,91 @@ function dbconn(){
     return $conn;
 }
 
+/* ---------------------- If Preparing Statement Fails ---------------------- */
+function stmtFailed() {
+    $previousPage = $_SERVER['HTTP_REFERER'];
+    
+    $urlPart = explode('?', $previousPage);
+    $baseURL = $urlPart[0];
+    
+    header("Location: " . $baseURL . "?error=stmtFailed");
+    exit();
+}
+
+/* -------------------------------------------------------------------------- */
+/*                              Ensure Logged In                              */
+/* -------------------------------------------------------------------------- */
+
+/* -------------------------- Ensure is Logged In  -------------------------- */
+function isLoggedIn(): bool {
+    return isset($_SESSION['Username'])
+        && $_SESSION['Username'] !== '';
+}
+
+/* ---------------------------- Ensure is Admin  ---------------------------- */
+function isAdmin(): bool {
+    return isLoggedIn() && $_SESSION['Role'] === 'admin';
+}
+
+/* -------------------------------------------------------------------------- */
+/*                               Miscellaneous                                */
+/* -------------------------------------------------------------------------- */
+
+/* ----------------------------- Create Banner  ----------------------------- */
+function banner() {
+    echo '<tr><td bgcolor="#603E20"><img src="../src/Banner.jpg" alt="Banner"  width="1290" height="100"></td></tr>';
+}
+
+/* ------------------------ Output Who is logged in  ------------------------ */
+function whoami() {
+    echo "Username:".$_SESSION['Username'];
+}
+
+/* -------------------------------------------------------------------------- */
+/*                                Registration                                */
+/* -------------------------------------------------------------------------- */
+
+/* -------------------------- Check if User Exists -------------------------- */
+function usrExists($conn, $username) {
+    $sql = "SELECT * FROM ".USERTABLE.
+        " WHERE Username = ?";
+
+    $stmt = mysqli_stmt_init($conn);
+    if (mysqli_stmt_prepare($stmt, $sql)) {
+        mysqli_stmt_bind_param($stmt, 's', $username);
+        mysqli_stmt_execute($stmt);
+
+        $resultData = mysqli_stmt_get_result($stmt);
+
+        if ($row= mysqli_fetch_assoc($resultData)) {
+            mysqli_stmt_close($stmt);
+            return $row;
+        }else {
+            mysqli_stmt_close($stmt);
+            $result = false;
+            return $result;
+        }
+        
+    }else {
+        mysqli_stmt_close($stmt);
+        stmtFailed();
+    }
+}
+
+
+/* -------- Check if Password and Confirmation Password is the same  -------- */
+function checkPassword($psw, $confPsw) {
+    if (strcmp($psw, $confPsw) !== 0) {
+        header("location:".BASEURL."/Registration/SignUp.php?error=PswDontMatch");
+        exit();
+    }
+}
+
+/* -------------------------------------------------------------------------- */
+/*                                   Tables                                   */
+/* -------------------------------------------------------------------------- */
+
+/* ------------------------ Show book table for user ------------------------ */
 function userBookTable($conn){
     $sql = "SELECT 
             b.BookID,
@@ -69,58 +162,7 @@ function userBookTable($conn){
     }
 }
 
-function isLoggedIn(): bool {
-    return isset($_SESSION['Username'])
-        && $_SESSION['Username'] !== '';
-}
-
-function isAdmin(): bool {
-    return isLoggedIn() && $_SESSION['Role'] === 'admin';
-}
-
-function checkPassword($psw, $confPsw) {
-    if (strcmp($psw, $confPsw) !== 0) {
-        header("location:".BASEURL."/Registration/SignUp.php?error=PswDontMatch");
-        exit();
-    }
-}
-
-function usrExists($conn, $username) {
-    $sql = "SELECT * FROM ".USERTABLE.
-        " WHERE Username = ?";
-
-    $stmt = mysqli_stmt_init($conn);
-    if (mysqli_stmt_prepare($stmt, $sql)) {
-        mysqli_stmt_bind_param($stmt, 's', $username);
-        mysqli_stmt_execute($stmt);
-
-        $resultData = mysqli_stmt_get_result($stmt);
-
-        if ($row= mysqli_fetch_assoc($resultData)) {
-            mysqli_stmt_close($stmt);
-            return $row;
-        }else {
-            mysqli_stmt_close($stmt);
-            $result = false;
-            return $result;
-        }
-        
-    }else {
-        mysqli_stmt_close($stmt);
-        stmtFailed();
-    }
-}
-
-function stmtFailed() {
-    $previousPage = $_SERVER['HTTP_REFERER'];
-    
-    $urlPart = explode('?', $previousPage);
-    $baseURL = $urlPart[0];
-    
-    header("Location: " . $baseURL . "?error=stmtFailed");
-    exit();
-}
-
+/* ---------------------- Shows borrowed books by user ---------------------- */
 function borrowedBookTable($conn){
     $sql = "SELECT 
             b.BookID,
@@ -162,6 +204,7 @@ function borrowedBookTable($conn){
     }
 }
 
+/* ----------------------- Show Book table for admin  ----------------------- */
 function adminBookTable($conn){
     $sql = "SELECT 
             b.BookID,
@@ -210,6 +253,7 @@ function adminBookTable($conn){
     }
 }
 
+/* --------------------- Show users who borrowed books  --------------------- */
 function userTable($conn){
     $sql = "SELECT 
             br.Username,
@@ -236,12 +280,4 @@ function userTable($conn){
             }
             echo "</tr>";
     }
-}
-
-function banner() {
-    echo '<tr><td bgcolor="#603E20"><img src="../src/Banner.jpg" alt="Banner"  width="1290" height="100"></td></tr>';
-}
-
-function whoami() {
-    echo "Username:".$_SESSION['Username'];
 }

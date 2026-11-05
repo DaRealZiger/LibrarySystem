@@ -1,6 +1,11 @@
 <?php
+/* ----------------------------- Start Session  ----------------------------- */
 session_start();
+
+/* --------------------------- Call all functions --------------------------- */
 require_once "function.inc.php";
+
+/* --------------------------- Defining Variables --------------------------- */
 $conn = dbconn();
 $BookID = $_POST["BookID"];
 $username = $_SESSION["Username"];
@@ -10,10 +15,12 @@ $borrowDate = $date -> format('Y-m-d');
 $date -> modify('+2 weeks');
 $dueDate = $date -> format('Y-m-d');
 
+/* ------------------------ Preparing sql statement  ------------------------ */
 $sql = "INSERT INTO ".BORROWTABLE." (BookID, Username, BorrowedDate, DueDate)
 VALUES (?, ?, '$borrowDate', '$dueDate')";
 $stmt = mysqli_stmt_init($conn);
 
+/* ------------------------ Executing sql statement  ------------------------ */
 if (mysqli_stmt_prepare($stmt, $sql)) {
     mysqli_stmt_bind_param($stmt, "ss", $BookID, $username);
     mysqli_stmt_execute($stmt);
