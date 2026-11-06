@@ -5,7 +5,7 @@
 const BOOKTABLE = 'Books';
 const USERTABLE = 'Users';
 const BORROWTABLE = 'BorrowedBook';
-const BASEURL = 'http://localhost:8080/LibrarySystem';
+const BASEURL = 'http://localhost/LibrarySystem';
 
 /* -------------------------------------------------------------------------- */
 /*                                    Sql                                     */

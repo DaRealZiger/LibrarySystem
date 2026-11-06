@@ -30,7 +30,6 @@ exit();
         </header>
 
         <form action="../Includes/login.inc.php" method="POST">
-        <form action="../Includes/login.inc.php" method="POST">
             <table align="center">
                 <!-- Space -->
                 <tr><td height="50" colspan=5></td></tr>
