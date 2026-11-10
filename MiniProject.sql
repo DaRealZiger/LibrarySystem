@@ -37,10 +37,12 @@ INSERT INTO Users(
     ("Sasha", "Password", "user");
 
 CREATE TABLE BorrowedBook(
-    BookID INT(250) NOT NULL REFERENCES Books(BookID),
-    Username varchar(255) NOT NULL REFERENCES Users(Username),
+    BookID INT(250) NOT NULL,
+    Username varchar(255) NOT NULL,
     BorrowedDate DATE NOT NULL,
-    DueDate DATE NOT NULL
+    DueDate DATE NOT NULL,
+    FOREIGN KEY(BookID) REFERENCES Books(BookID),
+    FOREIGN KEY(Username) REFERENCES Users(Username)
 );
 
 INSERT INTO BorrowedBook(
