@@ -27,6 +27,7 @@ if (!isLoggedIn()) {
                 </tr>
             </table>
         </header>
+        <form method="POST">
         <table align="center">
 
             <!-- Space -->
@@ -35,6 +36,7 @@ if (!isLoggedIn()) {
                     <table align="center" border="1">
                         <!-- Table Header -->
                         <tr height="40">
+                            <td></td>
                             <td align="center" width="250"><b>Name</b></td>
                             <td align="center" width="250"><b>Book</b></td>
                             <td align="center" width="150"><b>Due Date</b></td>
@@ -49,6 +51,7 @@ if (!isLoggedIn()) {
                     </table>
                 </td></tr>
         </table>
+        </form>
 
         <!-- Back Button -->
         <form action="CatalogueAdmin.php">

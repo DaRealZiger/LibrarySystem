@@ -169,7 +169,7 @@ $row = $result ->fetch_assoc();
                                             <td width="10"></td>
 
                                             <!-- Delete Book Button -->
-                                            <td><button type="submit" formaction="../Includes/delete.inc.php">Delete Book</button></td>
+                                            <td><button type="submit" formaction="../Includes/deleteBook.inc.php">Delete Book</button></td>
 
                                             <!-- Button seperator  -->
                                             <td width="10"></td>
