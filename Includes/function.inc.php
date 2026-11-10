@@ -146,10 +146,10 @@ function userBookTable($conn){
             echo "<td>&emsp;".$row["Publisher"]."</td>";
             if ($row["DisplayStatus"] !== 'Available') {
             echo "<td>&emsp;<font color='Red'>".$row["DisplayStatus"]."</font></td>";
-            echo "<td><button type='submit' formaction='../Includes/return.inc.php' name='BookID' value='".$row["BookID"]."'>Return</button></td>";
+            echo "<td><button type='submit' formaction='".BASEURL."/Includes/return.inc.php' name='BookID' value='".$row["BookID"]."'>Return</button></td>";
             } else{
             echo "<td>&emsp;".$row["DisplayStatus"]."</td>";
-            echo "<td><button type='submit' formaction='../Includes/borrow.inc.php' name='BookID' value='".$row["BookID"]."'>Borrow</button></td>";
+            echo "<td><button type='submit' formaction='".BASEURL."/Includes/borrow.inc.php' name='BookID' value='".$row["BookID"]."'>Borrow</button></td>";
             }
             echo "</tr>";
         } 
@@ -192,7 +192,7 @@ function borrowedBookTable($conn){
             echo "<td>&emsp;".$row["Author"]."</td>";
             echo "<td>&emsp;".$row["Publisher"]."</td>";
             echo "<td>&emsp;<font color='Red'>".$row["DueDate"]."</font></td>";
-            echo "<td><button type='submit' formaction='../Includes/return.inc.php' name='BookID' value='".$row["BookID"]."'>Return</button></td>";
+            echo "<td><button type='submit' formaction='".BASEURL."/Includes/return.inc.php' name='BookID' value='".$row["BookID"]."'>Return</button></td>";
             }
             echo "</tr>";
         } else {
@@ -205,21 +205,48 @@ function borrowedBookTable($conn){
 }
 
 /* ----------------------- Show Book table for admin  ----------------------- */
-function adminBookTable($conn){
-    $sql = "SELECT 
-            b.BookID,
-            b.BookName,
-            b.Language,
-            b.Author,
-            b.Publisher,
-            br.Username,
-            COALESCE(DATE_FORMAT(br.DueDate, '%d-%m-%Y'), b.Status) AS DisplayStatus
-        FROM ".BOOKTABLE." b
-        LEFT JOIN ".BORROWTABLE." br
-            ON b.BookID = br.BookID
-        ";
+function adminBookTable($conn, $bookName){
+    if ($bookName !== ""){
+        $sql = "SELECT 
+                b.BookID,
+                b.BookName,
+                b.Language,
+                b.Author,
+                b.Publisher,
+                br.Username,
+                COALESCE(DATE_FORMAT(br.DueDate, '%d-%m-%Y'), b.Status) AS DisplayStatus
+            FROM ".BOOKTABLE." b
+            LEFT JOIN ".BORROWTABLE." br
+                ON b.BookID = br.BookID
+            WHERE b.BookName LIKE ?";
 
-    $result = $conn ->query($sql);
+        $stmt = mysqli_stmt_init($conn);
+
+        if (mysqli_stmt_prepare($stmt, $sql)) {
+            $search = "%" .$bookName. "%";
+            mysqli_stmt_bind_param($stmt, 's', $search);
+            mysqli_stmt_execute($stmt);
+            $result = mysqli_stmt_get_result($stmt);
+            mysqli_stmt_close($stmt);
+        }else {
+            stmtFailed();
+        }
+    }else {
+        $sql = "SELECT 
+                b.BookID,
+                b.BookName,
+                b.Language,
+                b.Author,
+                b.Publisher,
+                br.Username,
+                COALESCE(DATE_FORMAT(br.DueDate, '%d-%m-%Y'), b.Status) AS DisplayStatus
+            FROM ".BOOKTABLE." b
+            LEFT JOIN ".BORROWTABLE." br
+                ON b.BookID = br.BookID
+            ";
+
+        $result = $conn ->query($sql);
+    }
     if ($result -> num_rows > 0) {
         while ($row = $result -> fetch_assoc()){
             if ($row["DisplayStatus"] !== 'Available' && $row["DisplayStatus"] !== 'Unavailable') {
@@ -233,7 +260,7 @@ function adminBookTable($conn){
             echo "<td>&emsp;<font color='Red'>".$row["DisplayStatus"]."</font></td>";
             } else{
             echo "<tr height = '58'>";
-            echo "<td><button type='submit' formaction='EditBook.php' name='BookID' value='".$row["BookID"]."'>Edit</button></td>";
+            echo "<td><button type='submit' formaction='".BASEURL."/Admin/EditBook.php' name='BookID' value='".$row["BookID"]."'>Edit</button></td>";
             echo "<td>&emsp;".$row["BookID"]."</td>";
             echo "<td>&emsp;".$row["BookName"]."</td>";
             echo "<td>&emsp;".$row["Language"]."</td>";
@@ -256,22 +283,33 @@ function adminBookTable($conn){
 /* --------------------- Show users who borrowed books  --------------------- */
 function userTable($conn){
     $sql = "SELECT 
-            br.Username,
+            u.Username,
             b.BookName,
             DATE_FORMAT(br.DueDate, '%d-%m-%Y') AS DueDate
-        FROM ".BOOKTABLE." b
-        INNER JOIN ".BORROWTABLE." br
-            ON b.BookID = br.BookID
-        ";
+        FROM ".USERTABLE." u
+        LEFT JOIN ".BORROWTABLE." br
+            ON u.Username = br.Username
+        LEFT JOIN ".BOOKTABLE." b
+            ON br.BookID = b.BookID
+        WHERE u.Role = 'user'";
 
     $result = $conn ->query($sql);
     if ($result -> num_rows > 0) {
         while ($row = $result -> fetch_assoc()){
+            if($row["DueDate"] !== null){
             echo "<tr height = '58'>";
+            echo "<td></td>";
             echo "<td>&emsp;".$row["Username"]."</td>";
             echo "<td>&emsp;".$row["BookName"]."</td>";
             echo "<td>&emsp;<font color='Red'>".$row["DueDate"]."</font></td>";
+            }else {
+            echo "<tr height = '58'>";
+            echo "<td><button type='submit' formaction='".BASEURL."/Includes/deleteUser.inc.php' name='username' value='".$row["Username"]."'>Delete</button</td>";
+            echo "<td>&emsp;".$row["Username"]."</td>";
+            echo "<td align='center'>-</td>";
+            echo "<td align='center'>-</td>";
             }
+        }
             echo "</tr>";
         } else {
             echo "<tr height = '58'>";

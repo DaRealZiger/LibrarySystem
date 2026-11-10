@@ -11,6 +11,8 @@ if (!isLoggedIn()) {
     header("location:".BASEURL."/User/CatalogueUser.php"); /* If Admin redirect to admin page */
     exit();
 }
+
+$bookName = $_POST["bookName"] ?? "";
 ?>
 <html>
     <head>
@@ -32,7 +34,11 @@ if (!isLoggedIn()) {
             <table align="center">
 
                 <!-- Space -->
-                <tr><td height="50" colspan=5></td></tr>
+                <tr><td height="50" colspan=5>
+                    <input type="text" name="bookName">
+                    &nbsp&nbsp
+                    <button>Search</button>
+                </td></tr>
                 <tr><td>
                         <table align="center" border="1">
                             <!-- Table Header -->
@@ -50,7 +56,7 @@ if (!isLoggedIn()) {
                             <!-- --------- Show Admin's Book Table --------- -->
                             <?php
                             $conn = dbconn();
-                            adminBookTable($conn);
+                            adminBookTable($conn, $bookName);
                             ?>
 
                         </table>
@@ -60,24 +66,52 @@ if (!isLoggedIn()) {
             <br>
 
             <!-- Buttons -->
-            <table align="center">
-                <tr>
-                    <!-- View Users Button -->
-                    <td width="100">
-                        <button type="submit" formaction="UserList.php">View Users</button>
-                    </td>
+            <?php
+            if ($bookName !== "") {
+                echo '<table align="center">';
+                    echo '<tr>';
+                        /* View Users Button */
+                        echo '<td width="100">';
+                            echo '<button type="submit" formaction="UserList.php">View Users</button>';
+                        echo '</td>';
 
-                    <!-- Add Book Button -->
-                    <td width="900">
-                        <button type="submit" formaction="AddBook.php">Add Book</button>
-                    </td>
+                        /* Add Book Button */
+                        echo '<td width="820">';
+                            echo '<button type="submit" formaction="AddBook.php">Add Book</button>';
+                        echo '</td>';
 
-                    <!-- Log Out Button -->
-                    <td>
-                        <button type="submit" formaction="../Includes/logout.inc.php">Log Out</button>
-                    </td>
-                </tr>
-            </table>
+                        /* Back Button */
+                        echo '<td width="70">';
+                        echo '<button type="submit" formaction="CatalogueAdmin.php">Back</button>';
+                        echo '</td>';
+
+                        /* Log Out Button */
+                        echo '<td>';
+                        echo '<button type="submit" formaction="../Includes/logout.inc.php">Log Out</button>';
+                        echo '</td>';
+                echo '</tr>';
+                echo '</table>';
+            }else {
+                echo '<table align="center">';
+                    echo '<tr>';
+                        /* View Users Button */
+                        echo '<td width="100">';
+                            echo '<button type="submit" formaction="UserList.php">View Users</button>';
+                        echo '</td>';
+
+                        /* Add Book Button */
+                        echo '<td width="900">';
+                            echo '<button type="submit" formaction="AddBook.php">Add Book</button>';
+                        echo '</td>';
+
+                        /* Log Out Button */
+                        echo '<td>';
+                        echo '<button type="submit" formaction="../Includes/logout.inc.php">Log Out</button>';
+                        echo '</td>';
+                echo '</tr>';
+                echo '</table>';
+            }
+            ?>
         </form>
     </body>
 </html>
