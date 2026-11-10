@@ -116,26 +116,58 @@ function checkPassword($psw, $confPsw) {
 /* -------------------------------------------------------------------------- */
 
 /* ------------------------ Show book table for user ------------------------ */
-function userBookTable($conn){
-    $sql = "SELECT 
-            b.BookID,
-            b.BookName,
-            b.Language,
-            b.Author,
-            b.Publisher,
-            COALESCE(DATE_FORMAT(br.DueDate, '%d-%m-%Y'), b.Status) AS DisplayStatus
-        FROM ".BOOKTABLE." b
-        LEFT JOIN ".BORROWTABLE." br
-            ON b.BookID = br.BookID
-            AND br.Username = '".$_SESSION['Username']."'
-        WHERE NOT EXISTS (
-            SELECT 1
-            FROM BorrowedBook other
-            WHERE other.BookID = b.BookID
-            AND other.Username != '".$_SESSION['Username']."'
-        )";
+function userBookTable($conn, $bookName){
+    if ($bookName !== "") {
+        $sql = "SELECT 
+                b.BookID,
+                b.BookName,
+                b.Language,
+                b.Author,
+                b.Publisher,
+                COALESCE(DATE_FORMAT(br.DueDate, '%d-%m-%Y'), b.Status) AS DisplayStatus
+            FROM ".BOOKTABLE." b
+            LEFT JOIN ".BORROWTABLE." br
+                ON b.BookID = br.BookID
+                AND br.Username = '".$_SESSION['Username']."'
+            WHERE NOT EXISTS (
+                SELECT 1
+                FROM BorrowedBook other
+                WHERE other.BookID = b.BookID
+                AND other.Username != '".$_SESSION['Username']."'
+            ) AND b.BookName LIKE ?";
 
-    $result = $conn ->query($sql);
+        $stmt = mysqli_stmt_init($conn);
+
+        if (mysqli_stmt_prepare($stmt, $sql)) {
+            $search = "%" .$bookName. "%";
+            mysqli_stmt_bind_param($stmt, 's', $search);
+            mysqli_stmt_execute($stmt);
+            $result = mysqli_stmt_get_result($stmt);
+            mysqli_stmt_close($stmt);
+        }else {
+            stmtFailed();
+        }
+    } else {
+        $sql = "SELECT 
+                b.BookID,
+                b.BookName,
+                b.Language,
+                b.Author,
+                b.Publisher,
+                COALESCE(DATE_FORMAT(br.DueDate, '%d-%m-%Y'), b.Status) AS DisplayStatus
+            FROM ".BOOKTABLE." b
+            LEFT JOIN ".BORROWTABLE." br
+                ON b.BookID = br.BookID
+                AND br.Username = '".$_SESSION['Username']."'
+            WHERE NOT EXISTS (
+                SELECT 1
+                FROM BorrowedBook other
+                WHERE other.BookID = b.BookID
+                AND other.Username != '".$_SESSION['Username']."'
+            )";
+
+        $result = $conn ->query($sql);
+    }
     if ($result -> num_rows > 0) {
         while ($row = $result -> fetch_assoc()){
             echo "<tr height = '58'>";

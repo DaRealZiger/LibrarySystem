@@ -11,6 +11,8 @@ if (isAdmin()) {
     header("location:".BASEURL."/Registration/LogIn.php"); /* If not logged in return to log in page */
     exit();
 }
+
+$bookName = $_POST["bookName"] ?? "";
 ?>
 
 <html>
@@ -34,10 +36,13 @@ if (isAdmin()) {
             <table align="center">
 
                 <!-- Space -->
-                <tr><td height="50" colspan=5></td></tr>
+                <tr><td height="50" colspan=5>
+                    <input type="text" name="bookName">
+                    &nbsp&nbsp
+                    <button>Search</button>
+                </td></tr>
                 <tr><td>
                         <table align="center" border="1">
-
                             <!-- Table Header -->
                             <tr height="40">
                                 <td width="50" align="center"><b>BookID</b></td>
@@ -52,7 +57,7 @@ if (isAdmin()) {
                             <!-- --------- Show User's Book table  --------- -->
                             <?php
                             $conn = dbconn();
-                            userBookTable($conn);
+                            userBookTable($conn, $bookName);
                             ?>
 
                         </table>
@@ -60,19 +65,44 @@ if (isAdmin()) {
             </table>
 
         <!-- Buttons -->
-        <table align="center">
-            <tr>
-                <!-- View Borrowed Button -->
-                <td width="950">
-                    <button type="submit" formaction="BorrowedBooks.php">View Borrowed</button>
-                </td>
+        <?php
+        if ($bookName !== "") {
+            echo '<table align="center">';
+                echo '<tr>';
+                    /* View Borrowed Button */
+                    echo '<td width="870">';
+                        echo '<button type="submit" formaction="BorrowedBooks.php">View Borrowed</button>';
+                    echo '</td>';
 
-                    <!-- Log Out Button -->
-                    <td align="right">
-                        <button type="submit" formaction="../Includes/logout.inc.php">Log out</button>
-                    </td>
-            </tr>
-        </table>
+                    /* Back Button */
+                    echo '<td width="80">';
+                        echo '<button type="submit" formaction="CatalogueUser.php">Back</button>';
+                    echo '</td>';
+
+                    /* Log Out Button */
+                    echo '<td align="right">';
+                        echo '<button type="submit" formaction="../Includes/logout.inc.php">Log out</button>';
+                    echo '</td>';
+
+                echo '</tr>';
+            echo '</table>';
+        } else {
+            echo '<table align="center">';
+                echo '<tr>';
+                    /* View Borrowed Button */
+                    echo '<td width="950">';
+                        echo '<button type="submit" formaction="BorrowedBooks.php">View Borrowed</button>';
+                    echo '</td>';
+
+                    /* Log Out Button */
+                    echo '<td align="right">';
+                        echo '<button type="submit" formaction="../Includes/logout.inc.php">Log out</button>';
+                    echo '</td>';
+
+                echo '</tr>';
+            echo '</table>';
+        }
+        ?>
         </form>
     </body>
 </html>
